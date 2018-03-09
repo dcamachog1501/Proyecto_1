@@ -5,6 +5,9 @@
  */
 package Ventanas;
 
+import java.awt.Toolkit;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 /**
@@ -49,6 +52,7 @@ public void Inicial_Creator()
   JFrame Ventana = new JFrame(Titulo);
   Ventana.setResizable(false);
   Ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+  Ventana.setIconImage(Toolkit.getDefaultToolkit().getImage("Resources/Icono.png"));
   Ventana.setSize((Ventana_Inicial.vent.getLargo()),(Ventana_Inicial.vent.getAncho()));
   Ventana.setVisible(true);
 }
