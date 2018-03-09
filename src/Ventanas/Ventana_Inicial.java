@@ -9,6 +9,15 @@ package Ventanas;
  *
  * @author dcama
  */
-public class Ventana_Inicial {
+public class Ventana_Inicial extends Gestor
+{
+    public Gestor Ventana;
+
     
+    public Ventana_Inicial()
+    {
+       
+    }
+    public static Gestor vent = new Gestor(600,300);
 }
+

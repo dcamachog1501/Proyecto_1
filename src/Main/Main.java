@@ -5,6 +5,8 @@
  */
 package Main;
 
+import Ventanas.Gestor;
+
 /**
  *
  * @author dcama
@@ -16,7 +18,8 @@ public class Main {
      */
     public static void main(String[] args) 
     {
-        
+       Gestor g = new Gestor();
+       g.GestWindow(1);
     }
     
 }
