@@ -11,6 +11,8 @@ import java.awt.Font;
 import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -29,6 +31,7 @@ private final Image Back=Toolkit.getDefaultToolkit().getImage("Resources/Backgro
     {
        JFrame Ventana = new JFrame(Titulo);
       Ventana.setResizable(false);
+      Ventana.setUndecorated(true);
       Ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       Ventana.setIconImage(Icono);
       Ventana.setSize(600,700);
@@ -82,6 +85,7 @@ private final Image Back=Toolkit.getDefaultToolkit().getImage("Resources/Backgro
       Salir.setMaximumSize(new Dimension(300,100));
       Salir.setFocusPainted(false);
       Salir.setCursor(new Cursor(Cursor.HAND_CURSOR));
+      Salir.addActionListener(new Exit());
       Uno.add(Salir);
       Uno.add(Box.createRigidArea(new Dimension(100,50)));
       
@@ -90,5 +94,13 @@ private final Image Back=Toolkit.getDefaultToolkit().getImage("Resources/Backgro
          
     }
     
-    
+    static class Exit implements ActionListener
+    {
+        public void actionPerformed(ActionEvent e) 
+        {
+            System.exit(0);
+        }
+
+    }
 }
+
