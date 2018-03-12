@@ -53,8 +53,4 @@ public class Gestor
             }
         }
     }
-    public String getTitle()
-    {
-        return this.Titulo;
-    }
 }

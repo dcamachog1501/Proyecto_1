@@ -6,6 +6,7 @@
 package Ventanas;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import static java.awt.Color.BLACK;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Cursor;
@@ -13,6 +14,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -36,6 +38,7 @@ private final Image Back=Toolkit.getDefaultToolkit().getImage("Resources/Backgro
       Ventana.setIconImage(Icono);
       Ventana.setSize(600,700);
       Ventana.setLocationRelativeTo(null);
+      Ventana.getRootPane().setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4,BLACK));
       
       
       JLabel Uno= new JLabel(new ImageIcon(Back));
@@ -63,6 +66,7 @@ private final Image Back=Toolkit.getDefaultToolkit().getImage("Resources/Backgro
       Jugar.setMaximumSize(new Dimension(300,100));
       Jugar.setFocusPainted(false);
       Jugar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+      Jugar.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, BLACK));
       Uno.add(Jugar);
       Uno.add(Box.createRigidArea(new Dimension(100,50)));
       
@@ -74,6 +78,7 @@ private final Image Back=Toolkit.getDefaultToolkit().getImage("Resources/Backgro
       Estadísticas.setMaximumSize(new Dimension(300,100));
       Estadísticas.setFocusPainted(false);
       Estadísticas.setCursor(new Cursor(Cursor.HAND_CURSOR));
+      Estadísticas.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, BLACK));
       Uno.add(Estadísticas);
       Uno.add(Box.createRigidArea(new Dimension(100,50)));
       
@@ -86,6 +91,7 @@ private final Image Back=Toolkit.getDefaultToolkit().getImage("Resources/Backgro
       Salir.setFocusPainted(false);
       Salir.setCursor(new Cursor(Cursor.HAND_CURSOR));
       Salir.addActionListener(new Exit());
+      Salir.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, BLACK));
       Uno.add(Salir);
       Uno.add(Box.createRigidArea(new Dimension(100,50)));
       
