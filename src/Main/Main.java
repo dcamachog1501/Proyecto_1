@@ -20,6 +20,7 @@ public class Main {
     {
        Gestor g = new Gestor();
        g.GestWindow(1);
+        
     }
     
 }

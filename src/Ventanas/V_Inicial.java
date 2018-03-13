@@ -4,43 +4,28 @@
  * and open the template in the editor.
  */
 package Ventanas;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import static java.awt.Color.BLACK;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Cursor;
-import java.awt.Image;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-
+import javax.swing.*;
 /**
  *
  * @author Daniel Camacho
  */
-public class V_Inicial extends Gestor 
+public class V_Inicial extends Gestor
 {
-private final Image Back=Toolkit.getDefaultToolkit().getImage("Resources/Background.jpg");
+private final Image Back=Toolkit.getDefaultToolkit().getImage("Resources/Backgrounds/Background.jpg");
+private static JFrame Ventana = new JFrame();
+
     public V_Inicial()
     {
-       JFrame Ventana = new JFrame(Titulo);
+      Ventana.setTitle(Titulo);
       Ventana.setResizable(false);
       Ventana.setUndecorated(true);
-      Ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       Ventana.setIconImage(Icono);
       Ventana.setSize(600,700);
       Ventana.setLocationRelativeTo(null);
-      Ventana.getRootPane().setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4,BLACK));
-      
-      
+      Ventana.getRootPane().setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4,Color.BLACK));
       JLabel Uno= new JLabel(new ImageIcon(Back));
       Uno.setLayout(new BoxLayout(Uno,BoxLayout.Y_AXIS));
       
@@ -52,13 +37,13 @@ private final Image Back=Toolkit.getDefaultToolkit().getImage("Resources/Backgro
      
 
       JLabel Icon=new JLabel();
-      Icon.setIcon(new ImageIcon(("Resources/Icono2.png")));
+      Icon.setIcon(new ImageIcon("Resources/Iconos/Icono2.png"));
       Icon.setHorizontalAlignment(JLabel.CENTER);
       Icon.setAlignmentX(JLabel.CENTER_ALIGNMENT);
       Uno.add(Icon);
       Uno.add(Box.createRigidArea(new Dimension(100,50)));
       
-      JButton Jugar= new JButton("¡JUGAR!");
+      JButton Jugar= new JButton("PLAY!");
       Jugar.setFont(FuenteTitulo.deriveFont(Font.PLAIN,20));
       Jugar.setForeground(Btn);
       Jugar.setBackground(Color.GREEN);
@@ -66,11 +51,12 @@ private final Image Back=Toolkit.getDefaultToolkit().getImage("Resources/Backgro
       Jugar.setMaximumSize(new Dimension(300,100));
       Jugar.setFocusPainted(false);
       Jugar.setCursor(new Cursor(Cursor.HAND_CURSOR));
-      Jugar.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, BLACK));
+      Jugar.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.BLACK));
+      Jugar.addActionListener(new Play());
       Uno.add(Jugar);
       Uno.add(Box.createRigidArea(new Dimension(100,50)));
       
-      JButton Estadísticas= new JButton("Estadisticas");
+      JButton Estadísticas= new JButton("Records");
       Estadísticas.setFont(FuenteTitulo.deriveFont(Font.PLAIN,20));
       Estadísticas.setForeground(Btn);
       Estadísticas.setBackground(Color.GREEN);
@@ -78,11 +64,11 @@ private final Image Back=Toolkit.getDefaultToolkit().getImage("Resources/Backgro
       Estadísticas.setMaximumSize(new Dimension(300,100));
       Estadísticas.setFocusPainted(false);
       Estadísticas.setCursor(new Cursor(Cursor.HAND_CURSOR));
-      Estadísticas.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, BLACK));
+      Estadísticas.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.BLACK));
       Uno.add(Estadísticas);
       Uno.add(Box.createRigidArea(new Dimension(100,50)));
       
-      JButton Salir= new JButton("Salir");
+      JButton Salir= new JButton("Quit");
       Salir.setFont(FuenteTitulo.deriveFont(Font.PLAIN,20));
       Salir.setForeground(Btn);
       Salir.setBackground(Color.GREEN);
@@ -91,7 +77,7 @@ private final Image Back=Toolkit.getDefaultToolkit().getImage("Resources/Backgro
       Salir.setFocusPainted(false);
       Salir.setCursor(new Cursor(Cursor.HAND_CURSOR));
       Salir.addActionListener(new Exit());
-      Salir.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, BLACK));
+      Salir.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.BLACK));
       Uno.add(Salir);
       Uno.add(Box.createRigidArea(new Dimension(100,50)));
       
@@ -105,6 +91,15 @@ private final Image Back=Toolkit.getDefaultToolkit().getImage("Resources/Backgro
         public void actionPerformed(ActionEvent e) 
         {
             System.exit(0);
+        }
+
+    }
+    static class Play implements ActionListener
+    {
+        public void actionPerformed(ActionEvent e) 
+        {
+            Ventana.dispose();
+            GestWindow(2);
         }
 
     }
