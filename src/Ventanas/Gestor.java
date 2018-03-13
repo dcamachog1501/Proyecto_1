@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package Ventanas;
-
-
 import java.awt.*;
 import java.io.*;
 
@@ -42,22 +40,26 @@ public class Gestor
      */
     public static void GestWindow(int x)
     {
+     V_Inicial VentanaInicial=new V_Inicial();
+     V_Datos VentanaDatos=new V_Datos();
+     V_Estadistica VentanaStatics=new V_Estadistica();
         switch(x)
         {
             case(1):
             {
-             V_Inicial Ventana=new V_Inicial();
+             VentanaInicial.getFrame().setVisible(true);
              break;
             }
             case(2):
             {
-                V_Datos Ventana=new V_Datos();
+                VentanaDatos.getFrame().setVisible(true);
+                break;
+            }
+            case(3):
+            {
+                VentanaStatics.getFrame().setVisible(true);
                 break;
             }
         }
-    }
-
-    void paintComponent(Graphics g) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

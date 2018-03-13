@@ -11,17 +11,20 @@ import javax.swing.*;
  */
 public class V_Datos extends Gestor
 {
-  private static int ind=0;
+  private Image PlayerNav;
+  private String PlayerNam;
+  private  int ind=0;
   private final Image Back1=Toolkit.getDefaultToolkit().getImage("Resources/Backgrounds/Back.png");
-  private static final Image Nav1=Toolkit.getDefaultToolkit().getImage("Resources/Naves/Nave1.png");
-  private static final Image Nav2=Toolkit.getDefaultToolkit().getImage("Resources/Naves/Nave2.png");
-  private static final Image Nav3=Toolkit.getDefaultToolkit().getImage("Resources/Naves/Nave3.png");
-  private static final Image Nav4=Toolkit.getDefaultToolkit().getImage("Resources/Naves/Nave4.png");
+  private  final Image Nav1=Toolkit.getDefaultToolkit().getImage("Resources/Naves/Nave1.png");
+  private  final Image Nav2=Toolkit.getDefaultToolkit().getImage("Resources/Naves/Nave2.png");
+  private  final Image Nav3=Toolkit.getDefaultToolkit().getImage("Resources/Naves/Nave3.png");
+  private  final Image Nav4=Toolkit.getDefaultToolkit().getImage("Resources/Naves/Nave4.png");
   private final Image Right=Toolkit.getDefaultToolkit().getImage("Resources/Iconos/right.png");
   private final Image Left=Toolkit.getDefaultToolkit().getImage("Resources/Iconos/left.png");
-  private static Image lista[]=new Image[]{Nav1,Nav2,Nav3,Nav4};
-  private static JLabel Nav=new JLabel(new ImageIcon(lista[ind]));
-  private static JFrame Ventana= new JFrame();
+  private  Image navselector[]=new Image[]{Nav1,Nav2,Nav3,Nav4};
+  private  JLabel Nav=new JLabel(new ImageIcon(navselector[ind]));
+  private  JFrame Ventana= new JFrame();
+  private JTextField Nombre= new JTextField(30);
   public V_Datos()
   {
    Ventana.setTitle(Titulo);
@@ -49,7 +52,6 @@ public class V_Datos extends Gestor
    Nav.setBounds(410,180,128,128);
    Panel2.add(Nav);
    
-   JTextField Nombre= new JTextField(30);
    Nombre.setBounds(160,50,200,30);
    Nombre.setFont(FuenteTitulo.deriveFont(Font.PLAIN,15));
    Nombre.setForeground(Color.BLACK);
@@ -79,6 +81,7 @@ public class V_Datos extends Gestor
    Play.setBorder(BorderFactory.createMatteBorder(4,4,4,4,Color.BLACK));
    Play.setFocusPainted(false);
    Play.setBounds(700,30, 250, 140);
+   Play.addActionListener(new Set());
    Panel1.add(Play);
    
    JButton back= new JButton("MAIN MENU");
@@ -117,12 +120,10 @@ public class V_Datos extends Gestor
    Titulo2.setForeground(Color.GREEN);
    Titulo2.setBounds(240, 20, 500, 100);
    Panel2.add(Titulo2);
-   
-   Ventana.setVisible(true);
   
    
   }
- public static void changeShip(int num)
+ public  void changeShip(int num)
  {
   if(num==1)
   {
@@ -147,20 +148,20 @@ public class V_Datos extends Gestor
       }
   }
  }
- public static void changeLbl()
+ public  void changeLbl()
  {
-     Nav.setIcon(new ImageIcon(lista[ind]));
+     Nav.setIcon(new ImageIcon(navselector[ind]));
  }
- static class Right implements ActionListener
+  class Right implements ActionListener
     {
         public void actionPerformed(ActionEvent e) 
         {
-            V_Datos.changeShip(1);
-            V_Datos.changeLbl();
+            changeShip(1);
+            changeLbl();
         }
 
     }
- static class Back implements ActionListener
+  class Back implements ActionListener
     {
         public void actionPerformed(ActionEvent e) 
         {
@@ -169,21 +170,43 @@ public class V_Datos extends Gestor
         }
 
     }
- static class Left implements ActionListener
+  class Left implements ActionListener
     {
         public void actionPerformed(ActionEvent e) 
         {
-            V_Datos.changeShip(0);
-            V_Datos.changeLbl();
+            changeShip(0);
+            changeLbl();
         }
 
     }
- static class Exit implements ActionListener
+  class Exit implements ActionListener
     {
         public void actionPerformed(ActionEvent e) 
         {
             System.exit(0);
         }
-
     }
+  class Set implements ActionListener
+    {
+        public void actionPerformed(ActionEvent e) 
+        {
+            setNav();
+            setName();
+        }
+    }
+  public JFrame getFrame() 
+    {
+        return Ventana;
+    }
+  public void setNav()
+  {
+      PlayerNav=navselector[ind];
+      System.out.println(PlayerNav);
+  }
+  public void setName()
+  {
+      PlayerNam=Nombre.getText();
+      System.out.println(PlayerNam);
+  }
+  
 }

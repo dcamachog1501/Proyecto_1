@@ -15,7 +15,7 @@ import javax.swing.*;
 public class V_Inicial extends Gestor
 {
 private final Image Back=Toolkit.getDefaultToolkit().getImage("Resources/Backgrounds/Background.jpg");
-private static JFrame Ventana = new JFrame();
+protected  JFrame Ventana = new JFrame();
 
     public V_Inicial()
     {
@@ -65,6 +65,7 @@ private static JFrame Ventana = new JFrame();
       Estadísticas.setFocusPainted(false);
       Estadísticas.setCursor(new Cursor(Cursor.HAND_CURSOR));
       Estadísticas.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.BLACK));
+      Estadísticas.addActionListener(new Statics());
       Uno.add(Estadísticas);
       Uno.add(Box.createRigidArea(new Dimension(100,50)));
       
@@ -82,11 +83,15 @@ private static JFrame Ventana = new JFrame();
       Uno.add(Box.createRigidArea(new Dimension(100,50)));
       
       Ventana.add(Uno,BorderLayout.CENTER);
-      Ventana.setVisible(true);
          
     }
+
+    public JFrame getFrame() 
+    {
+        return this.Ventana;
+    }
     
-    static class Exit implements ActionListener
+     class Exit implements ActionListener
     {
         public void actionPerformed(ActionEvent e) 
         {
@@ -94,12 +99,21 @@ private static JFrame Ventana = new JFrame();
         }
 
     }
-    static class Play implements ActionListener
+     class Play implements ActionListener
     {
         public void actionPerformed(ActionEvent e) 
         {
             Ventana.dispose();
             GestWindow(2);
+        }
+
+    }
+     class Statics implements ActionListener
+    {
+        public void actionPerformed(ActionEvent e) 
+        {
+            Ventana.dispose();
+            GestWindow(3);
         }
 
     }
