@@ -13,13 +13,17 @@ import java.io.*;
  */
 public class Gestor
 {
-   protected final String Titulo="Invaders";
-   protected final Image Icono=Toolkit.getDefaultToolkit().getImage("Resources/Iconos/Icono.png");
+   protected static final String Titulo="Invaders";
+   protected static final Image Icono=Toolkit.getDefaultToolkit().getImage("Resources/Iconos/Icono.png");
    protected Font FuenteTitulo;
    protected final Color Btn=new Color(75,0,130);
    protected final Color LightG=new Color(124,252,0);
-    public Gestor()
+   protected static V_Inicial VentanaInicial=new V_Inicial();
+   protected static V_Datos VentanaDatos=new V_Datos();
+   protected static V_Estadistica VentanaStatics=new V_Estadistica();
+   public Gestor()
     {
+        
         try 
         {
         FuenteTitulo = Font.createFont(Font.TRUETYPE_FONT, new File("Resources/Fuentes/Furore.ttf"));
@@ -40,9 +44,6 @@ public class Gestor
      */
     public static void GestWindow(int x)
     {
-     V_Inicial VentanaInicial=new V_Inicial();
-     V_Datos VentanaDatos=new V_Datos();
-     V_Estadistica VentanaStatics=new V_Estadistica();
         switch(x)
         {
             case(1):
@@ -61,5 +62,13 @@ public class Gestor
                 break;
             }
         }
+    }
+    public static String getTitle()
+    {
+        return Titulo;
+    }
+    public static Image getIcon()
+    {
+        return Icono;
     }
 }

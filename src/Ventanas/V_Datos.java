@@ -3,6 +3,8 @@ package Ventanas;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.*;
 
 /**
@@ -25,6 +27,8 @@ public class V_Datos extends Gestor
   private  JLabel Nav=new JLabel(new ImageIcon(navselector[ind]));
   private  JFrame Ventana= new JFrame();
   private JTextField Nombre= new JTextField(30);
+  private JButton right=new JButton(new ImageIcon(Right));
+  private JButton left=new JButton(new ImageIcon(Left));
   public V_Datos()
   {
    Ventana.setTitle(Titulo);
@@ -35,6 +39,8 @@ public class V_Datos extends Gestor
    Ventana.getRootPane().setBorder(BorderFactory.createMatteBorder(4,4,4,4,Color.BLACK));
    Ventana.setResizable(false);
    Ventana.setIconImage(Icono);
+   Ventana.addKeyListener(new Teclado());
+   Ventana.setFocusable(true);
    
    JPanel Panel1= new JPanel();
    Panel1.setBackground(Color.DARK_GRAY);
@@ -99,7 +105,6 @@ public class V_Datos extends Gestor
    Back.setBorder(BorderFactory.createMatteBorder(4,0,0,0,Color.BLACK));
    Panel1.add(Back);
    
-   JButton right=new JButton(new ImageIcon(Right));
    right.setOpaque(false);
    right.setContentAreaFilled(false);
    right.setBorderPainted(false);
@@ -107,7 +112,6 @@ public class V_Datos extends Gestor
    right.addActionListener(new Right());
    Panel2.add(right);
    
-   JButton left=new JButton(new ImageIcon(Left));
    left.setOpaque(false);
    left.setContentAreaFilled(false);
    left.setBorderPainted(false);
@@ -120,7 +124,6 @@ public class V_Datos extends Gestor
    Titulo2.setForeground(Color.GREEN);
    Titulo2.setBounds(240, 20, 500, 100);
    Panel2.add(Titulo2);
-  
    
   }
  public  void changeShip(int num)
@@ -154,6 +157,7 @@ public class V_Datos extends Gestor
  }
   class Right implements ActionListener
     {
+        @Override
         public void actionPerformed(ActionEvent e) 
         {
             changeShip(1);
@@ -163,6 +167,7 @@ public class V_Datos extends Gestor
     }
   class Back implements ActionListener
     {
+        @Override
         public void actionPerformed(ActionEvent e) 
         {
             Ventana.dispose();
@@ -172,6 +177,7 @@ public class V_Datos extends Gestor
     }
   class Left implements ActionListener
     {
+        @Override
         public void actionPerformed(ActionEvent e) 
         {
             changeShip(0);
@@ -181,6 +187,7 @@ public class V_Datos extends Gestor
     }
   class Exit implements ActionListener
     {
+        @Override
         public void actionPerformed(ActionEvent e) 
         {
             System.exit(0);
@@ -194,6 +201,33 @@ public class V_Datos extends Gestor
             setName();
         }
     }
+  class Teclado implements KeyListener
+  {
+        @Override
+        public void keyTyped(KeyEvent e) 
+        {
+      
+        }
+        @Override
+        public void keyPressed(KeyEvent e) 
+        {
+            int code= e.getKeyCode();
+            if(code==KeyEvent.VK_RIGHT)
+            {
+               right.doClick();
+            }
+            else if(code==KeyEvent.VK_LEFT)
+            {
+                left.doClick(); 
+            }
+        }
+        @Override
+        public void keyReleased(KeyEvent e) 
+        {
+       
+        }
+      
+  }
   public JFrame getFrame() 
     {
         return Ventana;
