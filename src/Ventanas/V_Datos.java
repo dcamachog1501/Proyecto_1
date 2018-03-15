@@ -1,5 +1,6 @@
 
 package Ventanas;
+import static Ventanas.Gestor.GestWindow;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,17 +14,22 @@ import javax.swing.*;
  */
 public class V_Datos extends Gestor
 {
-  private Image PlayerNav;
-  private String PlayerNam;
+  private static Image PlayerNav;
+  private static String PlayerNam;
   private  int ind=0;
   private final Image Back1=Toolkit.getDefaultToolkit().getImage("Resources/Backgrounds/Back.png");
   private  final Image Nav1=Toolkit.getDefaultToolkit().getImage("Resources/Naves/Nave1.png");
   private  final Image Nav2=Toolkit.getDefaultToolkit().getImage("Resources/Naves/Nave2.png");
   private  final Image Nav3=Toolkit.getDefaultToolkit().getImage("Resources/Naves/Nave3.png");
   private  final Image Nav4=Toolkit.getDefaultToolkit().getImage("Resources/Naves/Nave4.png");
+  private  final Image Nav1_1=Toolkit.getDefaultToolkit().getImage("Resources/Naves/Nave1_1.png");
+  private  final Image Nav2_1=Toolkit.getDefaultToolkit().getImage("Resources/Naves/Nave2_1.png");
+  private  final Image Nav3_1=Toolkit.getDefaultToolkit().getImage("Resources/Naves/Nave3_1.png");
+  private  final Image Nav4_1=Toolkit.getDefaultToolkit().getImage("Resources/Naves/Nave4_1.png");
   private final Image Right=Toolkit.getDefaultToolkit().getImage("Resources/Iconos/right.png");
   private final Image Left=Toolkit.getDefaultToolkit().getImage("Resources/Iconos/left.png");
   private  Image navselector[]=new Image[]{Nav1,Nav2,Nav3,Nav4};
+  private  Image navselector2[]=new Image[]{Nav1_1,Nav2_1,Nav3_1,Nav4_1};
   private  JLabel Nav=new JLabel(new ImageIcon(navselector[ind]));
   private  JFrame Ventana= new JFrame();
   private JTextField Nombre= new JTextField(30);
@@ -77,7 +83,14 @@ public class V_Datos extends Gestor
    Abort.setBorder(BorderFactory.createMatteBorder(4,4,4,4,Color.BLACK));
    Abort.setFocusPainted(false);
    Abort.setBounds(20,120, 200, 70);
-   Abort.addActionListener(new Exit());
+   Abort.addActionListener(new ActionListener()
+   {
+       @Override
+       public void actionPerformed(ActionEvent e) 
+       {
+        System.exit(0);
+       }
+   });
    Panel1.add(Abort);
    
    JButton Play= new JButton("PLAY!");
@@ -87,7 +100,17 @@ public class V_Datos extends Gestor
    Play.setBorder(BorderFactory.createMatteBorder(4,4,4,4,Color.BLACK));
    Play.setFocusPainted(false);
    Play.setBounds(700,30, 250, 140);
-   Play.addActionListener(new Set());
+   Play.addActionListener(new ActionListener()
+   {
+       @Override
+       public void actionPerformed(ActionEvent e) 
+       {
+            setNav();
+            setName();
+            Ventana.dispose();
+            Gestor.GestWindow(4);
+       }
+   });
    Panel1.add(Play);
    
    JButton back= new JButton("MAIN MENU");
@@ -97,7 +120,16 @@ public class V_Datos extends Gestor
    back.setBorder(BorderFactory.createMatteBorder(4,4,4,4,Color.BLACK));
    back.setFocusPainted(false);
    back.setBounds(375,120, 200, 70);
-   back.addActionListener(new Back());
+   back.addActionListener(new ActionListener()
+   {
+       @Override
+       public void actionPerformed(ActionEvent e) 
+       {
+            Ventana.dispose();
+            GestWindow(1);
+       }
+       
+   });
    Panel1.add(back);
    
    JLabel Back=new JLabel(new ImageIcon(Back1));
@@ -109,14 +141,32 @@ public class V_Datos extends Gestor
    right.setContentAreaFilled(false);
    right.setBorderPainted(false);
    right.setBounds(570,220, 64, 64);
-   right.addActionListener(new Right());
+   right.addActionListener(new ActionListener()
+   {
+       @Override
+       public void actionPerformed(ActionEvent e) 
+       {
+           changeShip(1);
+            changeLbl();
+       }
+       
+   });
    Panel2.add(right);
    
    left.setOpaque(false);
    left.setContentAreaFilled(false);
    left.setBorderPainted(false);
    left.setBounds(315,220,64,64);
-   left.addActionListener(new Left());
+   left.addActionListener(new ActionListener()
+   {
+       @Override
+       public void actionPerformed(ActionEvent e)
+       {
+         changeShip(0);
+         changeLbl();  
+       }
+       
+   });
    Panel2.add(left);
    
    JLabel Titulo2=new JLabel("SELECT A SPACESHIP");
@@ -155,52 +205,7 @@ public class V_Datos extends Gestor
  {
      Nav.setIcon(new ImageIcon(navselector[ind]));
  }
-  class Right implements ActionListener
-    {
-        @Override
-        public void actionPerformed(ActionEvent e) 
-        {
-            changeShip(1);
-            changeLbl();
-        }
-
-    }
-  class Back implements ActionListener
-    {
-        @Override
-        public void actionPerformed(ActionEvent e) 
-        {
-            Ventana.dispose();
-            GestWindow(1);
-        }
-
-    }
-  class Left implements ActionListener
-    {
-        @Override
-        public void actionPerformed(ActionEvent e) 
-        {
-            changeShip(0);
-            changeLbl();
-        }
-
-    }
-  class Exit implements ActionListener
-    {
-        @Override
-        public void actionPerformed(ActionEvent e) 
-        {
-            System.exit(0);
-        }
-    }
-  class Set implements ActionListener
-    {
-        public void actionPerformed(ActionEvent e) 
-        {
-            setNav();
-            setName();
-        }
-    }
+  
   class Teclado implements KeyListener
   {
         @Override
@@ -234,13 +239,17 @@ public class V_Datos extends Gestor
     }
   public void setNav()
   {
-      PlayerNav=navselector[ind];
+      PlayerNav=navselector2[ind];
       System.out.println(PlayerNav);
   }
   public void setName()
   {
       PlayerNam=Nombre.getText();
       System.out.println(PlayerNam);
+  }
+  public static Image getNav()
+  {
+      return PlayerNav;
   }
   
 }

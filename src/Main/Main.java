@@ -4,8 +4,7 @@
  * and open the template in the editor.
  */
 package Main;
-
-import Juego.Canvas;
+import Juego.*;
 import Ventanas.Gestor;
 
 /**
@@ -19,9 +18,8 @@ public class Main {
      */
     public static void main(String[] args) 
     {
-//       Gestor g = new Gestor();
-//       g.GestWindow(1);
-        Canvas can= new Canvas();
+       Gestor g = new Gestor();
+       g.GestWindow(1);
     }
     
 }

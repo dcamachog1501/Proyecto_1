@@ -1,5 +1,6 @@
 
 package Ventanas;
+import static Ventanas.Gestor.GestWindow;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,7 +11,7 @@ import javax.swing.*;
  */
 public class V_Estadistica extends Gestor
 {
-    private final Image Back2=Toolkit.getDefaultToolkit().getImage("Resources/Backgrounds/Back2.png");
+    private static final Image Back2=Toolkit.getDefaultToolkit().getImage("Resources/Backgrounds/Back2.png");
     private  JFrame Ventana= new JFrame();
     V_Estadistica()
     {
@@ -100,7 +101,16 @@ public class V_Estadistica extends Gestor
     Menu.setBorder(BorderFactory.createMatteBorder(4,4,4,4,Color.BLACK));
     Menu.setFocusPainted(false);
     Menu.setBounds(20,550, 200, 70);
-    Menu.addActionListener(new Back());
+    Menu.addActionListener(new ActionListener()
+    {
+        @Override
+        public void actionPerformed(ActionEvent e) 
+        {
+            Ventana.dispose();
+            GestWindow(1);
+        }
+        
+    });
     Panel1.add(Menu);
     
     JButton Abort = new JButton("ABORT");
@@ -110,7 +120,17 @@ public class V_Estadistica extends Gestor
     Abort.setBorder(BorderFactory.createMatteBorder(4,0,4,4,Color.BLACK));
     Abort.setFocusPainted(false);
     Abort.setBounds(0,75, 200, 70);
-    Abort.addActionListener(new Exit());
+    Abort.addActionListener(new ActionListener()
+    {
+        
+
+        @Override
+        public void actionPerformed(ActionEvent e) 
+        {
+            System.exit(0);
+        }
+    }
+    );
     Panel2.add(Abort);
     
     JLabel Back3=new JLabel();
@@ -125,25 +145,12 @@ public class V_Estadistica extends Gestor
     Back4.setBorder(BorderFactory.createMatteBorder(0,4,0,0,Color.BLACK));
     Panel2.add(Back4);
     }
-     class Exit implements ActionListener
-    {
-        public void actionPerformed(ActionEvent e) 
-        {
-            System.exit(0);
-        }
-
-    }
-     class Back implements ActionListener
-    {
-        public void actionPerformed(ActionEvent e) 
-        {
-            Ventana.dispose();
-            GestWindow(1);
-        }
-
-    }
      public JFrame getFrame() 
     {
         return this.Ventana;
+    }
+     public static Image getBack2()
+    {
+        return Back2;
     }
 }
