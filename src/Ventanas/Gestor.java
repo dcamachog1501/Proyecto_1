@@ -65,7 +65,7 @@ public class Gestor
             }
             case(4):
             {
-                Jugar.setVisible(true);
+                Jugar.getFrame().setVisible(true);
                 break;
             }
         }

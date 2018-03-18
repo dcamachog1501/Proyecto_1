@@ -4,24 +4,35 @@
  * and open the template in the editor.
  */
 package Juego;
-
 import Ventanas.Gestor;
 import Ventanas.V_Datos;
 import Ventanas.V_Estadistica;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
- * @author dcama
+ * @author Daniel Camacho
  */
-public class Juego extends JFrame 
+public class Juego
 {
-  private Canv Canvas=new Canv();
-  private Font FuenteMarc;
-  public Juego() 
-  {
+private Font FuenteMarc;
+private JFrame Ventana= new JFrame();
+private static int Navx=460;
+private static int Navy=605;
+private static Canv canv= new Canv();
+private final Image Shoot=Toolkit.getDefaultToolkit().getImage("Resources/disparos/Shoot.png");
+public Juego()
+{
     try
     {
         FuenteMarc= Font.createFont(Font.TRUETYPE_FONT, new File("Resources/Fuentes/Marcador.ttf"));
@@ -30,23 +41,31 @@ public class Juego extends JFrame
     {
         e.printStackTrace();
     }
-    setTitle(Gestor.getTitle());
-    setSize(1300,700);
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setUndecorated(true);
-    setLocationRelativeTo(null);
-    getRootPane().setBorder(BorderFactory.createMatteBorder(8,8,8,8, Color.BLACK));
-    setResizable(false);
-    setIconImage(Gestor.getIcon());
-    setFocusable(true);
     
-    add(Canvas,BorderLayout.EAST);
+    Ventana.setTitle(Gestor.getTitle());
+    Ventana.setSize(1300,700);
+    Ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    Ventana.setUndecorated(true);
+    Ventana.setLocationRelativeTo(null);
+    Ventana.getRootPane().setBorder(BorderFactory.createMatteBorder(8,8,8,8, Color.BLACK));
+    Ventana.setResizable(false);
+    Ventana.setIconImage(Gestor.getIcon());
+    Ventana.setFocusable(true);
+    Ventana.addKeyListener(new Teclado());
+    
+    
+    
+    JPanel fondo=new JPanel();
+    fondo.setBackground(Color.DARK_GRAY);
+    fondo.setPreferredSize(new Dimension(985,670));
+    fondo.add(canv);
+    Ventana.getContentPane().add(fondo,BorderLayout.EAST);
     
     JPanel Panel1= new JPanel();
     Panel1.setPreferredSize(new Dimension(300,1000));
     Panel1.setBackground(Color.DARK_GRAY);
     Panel1.setBorder(BorderFactory.createMatteBorder(4,0,0,8,Color.BLACK));
-    add(Panel1,BorderLayout.WEST);
+    Ventana.add(Panel1,BorderLayout.WEST);
     
     JLabel Punt= new JLabel(" 0000000000000");
     Punt.setBackground(Gestor.getColor());
@@ -104,23 +123,98 @@ public class Juego extends JFrame
     Punt6.setBounds(0,320,292,500);
     Panel1.add(Punt6); 
   }
-  private class Canv extends Canvas
-  {
-      private int Navx=460;
-      private int Navy=615;
-      public Canv()
-      {
-          setBackground(Color.DARK_GRAY);
-          this.setPreferredSize(new Dimension(985,670));
-          setFont(Gestor.getFont().deriveFont(Font.PLAIN, 20));
-          setForeground(Color.GREEN);
-          
-      }
-      @Override
-      public void paint(Graphics g)
-      {
-          g.drawImage(V_Datos.getNav(),Navx,Navy,this);
-      }
+
+   public JFrame getFrame()
+   {
+       return Ventana;
+   }
+   public static int getX()
+   {
+   return Navx;
+   }
+   public static int getY()
+   {
+       return Navy;
+   }
+   public static Canv getCanv()
+   {
+       return canv;
+   }
+public class Teclado implements KeyListener
+{
+        @Override
+        public void keyTyped(KeyEvent e) 
+        {
+            
+        }
+        @Override
+        public void keyPressed(KeyEvent e) 
+        {
+            int code= e.getKeyCode();
+            if(code==KeyEvent.VK_RIGHT)
+            {
+                if (Navx+20>=920)
+                  {
+                      Navx=920;
+                      canv.repaint();
+
+                  }
+                else
+                  {    
+                    Navx+=25;
+                    canv.repaint();
+                  }
+            }
+            else if(code==KeyEvent.VK_LEFT)
+            {
+                if (Navx-20<=0)
+                   {
+                       Navx=0;
+                       canv.repaint();
+                   }
+                else 
+                   {    
+                     Navx-=25;
+                     canv.repaint();
+                   }
+            }
+           
+        }
+        @Override
+        public void keyReleased(KeyEvent e) 
+        {
+            int code= e.getKeyCode();
+            if(code==KeyEvent.VK_F)
+            {
+                   System.out.println("1");
+                   Shoot disp=new Shoot();
+                   disp.start();
+                   canv.setCond();
+                   canv.repaint();
+             
+            }
+        }
+     class Shoot extends Thread
+    {
+        public void run()
+        {
+           canv.setCond();
+           while (Bullet.getBullY()>0)
+            {
+                Bullet.setY(-25);
+                Juego.getCanv().repaint();
+                try
+                {
+                 Thread.sleep(1000);   
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
+
   }
-  
 }
+}
+

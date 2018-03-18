@@ -206,7 +206,7 @@ public class V_Datos extends Gestor
      Nav.setIcon(new ImageIcon(navselector[ind]));
  }
   
-  class Teclado implements KeyListener
+  private class Teclado implements KeyListener
   {
         @Override
         public void keyTyped(KeyEvent e) 
@@ -240,12 +240,10 @@ public class V_Datos extends Gestor
   public void setNav()
   {
       PlayerNav=navselector2[ind];
-      System.out.println(PlayerNav);
   }
   public void setName()
   {
       PlayerNam=Nombre.getText();
-      System.out.println(PlayerNam);
   }
   public static Image getNav()
   {
