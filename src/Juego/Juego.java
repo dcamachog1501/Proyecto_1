@@ -5,16 +5,17 @@
  */
 package Juego;
 import Ventanas.Gestor;
-import Ventanas.V_Datos;
+import org.lwjgl.*;
 import Ventanas.V_Estadistica;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -27,10 +28,13 @@ public class Juego
 {
 private Font FuenteMarc;
 private JFrame Ventana= new JFrame();
-private static int Navx=460;
-private static int Navy=605;
-private static Canv canv= new Canv();
+private  static int Navx=460;
+private  static int Navy=605;
+private  Canv canv= new Canv();
+private int marc;
+private String marcs=String.format("%013d",marc);
 private final Image Shoot=Toolkit.getDefaultToolkit().getImage("Resources/disparos/Shoot.png");
+private JLabel Punt= new JLabel(marcs);
 public Juego()
 {
     try
@@ -67,7 +71,6 @@ public Juego()
     Panel1.setBorder(BorderFactory.createMatteBorder(4,0,0,8,Color.BLACK));
     Ventana.add(Panel1,BorderLayout.WEST);
     
-    JLabel Punt= new JLabel(" 0000000000000");
     Punt.setBackground(Gestor.getColor());
     Punt.setOpaque(true);
     Punt.setBorder(BorderFactory.createMatteBorder(4,0,8,0, Color.BLACK));
@@ -136,7 +139,7 @@ public Juego()
    {
        return Navy;
    }
-   public static Canv getCanv()
+   public  Canv getCanv()
    {
        return canv;
    }
@@ -178,43 +181,54 @@ public class Teclado implements KeyListener
                      canv.repaint();
                    }
             }
+            if(code==KeyEvent.VK_F)
+                if(canv.getBullet().getCond()==0)
+                    {
+                     canv.setCond();
+                     canv.getBullet().setY(Juego.getY());
+                     canv.getBullet().setX();
+                     Shoot t=new Shoot();
+                     t.start();
+                    }
+                
            
         }
         @Override
         public void keyReleased(KeyEvent e) 
         {
-            int code= e.getKeyCode();
-            if(code==KeyEvent.VK_F)
-            {
-                   System.out.println("1");
-                   Shoot disp=new Shoot();
-                   disp.start();
-                   canv.setCond();
-                   canv.repaint();
-             
-            }
+            
         }
-     class Shoot extends Thread
-    {
-        public void run()
+public class Shoot extends Thread
         {
-           canv.setCond();
-           while (Bullet.getBullY()>0)
+            public void run()
             {
-                Bullet.setY(-25);
-                Juego.getCanv().repaint();
-                try
+                while(canv.getBullet().getBullY()>=0)
                 {
-                 Thread.sleep(1000);   
+                    canv.getBullet().setY(-20);
+                    canv.setCond();
+                    canv.repaint();
+                    try {
+                        Thread.sleep(10);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                
                 }
-                catch(Exception e)
-                {
-                    e.printStackTrace();
-                }
+                addMarc(100);
+                Punt.setText(marcs);
+                updateMarcs();
+                canv.setCond();
+                canv.repaint();
             }
         }
-
-  }
+    public void addMarc(int x)
+    {
+        marc+=x;
+    }
+    public void updateMarcs()
+    {
+     marcs=String.format("%013d",marc); 
+    }
 }
 }
 

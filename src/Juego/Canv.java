@@ -17,7 +17,7 @@ public class Canv extends JComponent
 
 {
  private Boolean cond=false;   
- private Bullet bala= new Bullet();
+ private final Bullet bala= new Bullet();
     public Canv()
       {
           setPreferredSize(new Dimension(985,670)); 
@@ -33,25 +33,26 @@ public class Canv extends JComponent
           }
           else if (cond==true)
           {
-          System.out.println("Shoot");
           g.drawImage(V_Datos.getNav(),Juego.getX(),Juego.getY(),this);
-          g.drawImage(Bullet.getImage(),Bullet.getBullX(),Bullet.getBullY(),this);
+          g.drawImage(bala.getImage(),bala.getBullX(),bala.getBullY(),this);
           }
       }
     public void setCond()
     {
         if(cond!=true)
         {
-            System.out.println("3");
             cond=true;
             repaint();
         }
         else
         {
-            System.out.println("2");
             cond=false;
             repaint();
         }
     }
-    
+    public Bullet getBullet()
+    {
+        return bala;
+    }
+
 }

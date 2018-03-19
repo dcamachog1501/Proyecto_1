@@ -13,27 +13,46 @@ import java.awt.*;
  */
 public class Bullet 
 {
-    private static final Image Shoot=Toolkit.getDefaultToolkit().getImage("Resources/disparos/Shoot.png");
-    private static final int Bullx=Juego.getX();
-    private static int Bully=Juego.getY();
+    private  final Image Shoot=Toolkit.getDefaultToolkit().getImage("Resources/disparos/Shoot.png");
+    private  int Bullx=Juego.getX()+17;
+    private  int Bully=Juego.getY();
+    private  int cond;
     public Bullet()
     {
         Image Bull=Shoot;
         
     }
-   public static int getBullY()
+   public  int getBullY()
    {
        return Bully;
    }
-   public static int getBullX()
+   public  int getBullX()
    {
        return Bullx;
    }
-   public static void setY(int y)
+   public  void setY(int y)
    {
        Bully+= y;
    }
-   public static Image getImage(){
+   public  void setX()
+   {
+       Bullx=Juego.getX()+17;
+   }
+   public  Image getImage(){
        return Shoot;
    }
+   public int getCond()
+   {
+       return cond;
+   }
+   public void setCond()
+   {
+       if(cond==0)
+       {
+           cond=1;
+       }
+       cond=0;
+   }
+
+    
 }
