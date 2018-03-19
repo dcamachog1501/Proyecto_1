@@ -5,14 +5,13 @@
  */
 package Juego;
 import Ventanas.Gestor;
-import org.lwjgl.*;
 import Ventanas.V_Estadistica;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -113,6 +112,15 @@ public Juego()
     Abort.setBorder(BorderFactory.createMatteBorder(4,4,4,4,Color.BLACK));
     Abort.setFocusPainted(false);
     Abort.setBounds(48,550, 200, 70);
+    Abort.addActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e) 
+        {
+            System.exit(0);
+        }
+        
+        
+    });
     Panel1.add(Abort);
     
     JLabel Punt7= new JLabel("LEVEL ");
