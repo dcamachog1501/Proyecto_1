@@ -5,22 +5,24 @@
  */
 package Juego;
 
+import Ventanas.Gestor2;
 import java.awt.*;
 
 /**
  *
  * @author Curso
  */
-public class Bullet 
+public class Bullet
 {
     private  final Image Shoot=Toolkit.getDefaultToolkit().getImage("Resources/disparos/Shoot.png");
-    private  int Bullx=Juego.getX()+17;
-    private  int Bully=Juego.getY();
+    private  int Bullx;                                                      
+    private  int Bully;
     private  int cond;
-    public Bullet()
+    
+    public Bullet(int x, int y)
     {
-        Image Bull=Shoot;
-        
+        Bullx=x;
+        Bully=y;
     }
    public  int getBullY()
    {
@@ -32,11 +34,7 @@ public class Bullet
    }
    public  void setY(int y)
    {
-       Bully+= y;
-   }
-   public  void setX()
-   {
-       Bullx=Juego.getX()+17;
+       Bully-= y;
    }
    public  Image getImage(){
        return Shoot;
@@ -51,7 +49,18 @@ public class Bullet
        {
            cond=1;
        }
+       else
+       {
        cond=0;
+       }
+   }
+   public void setBully(int y)
+   {
+       Bully=y;
+   }
+   public void setBullx(int x)
+   {
+       Bullx=x;
    }
 
     

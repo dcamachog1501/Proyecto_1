@@ -4,22 +4,20 @@
  * and open the template in the editor.
  */
 package Main;
-import Juego.*;
-import Ventanas.Gestor;
+
+import Ventanas.Gestor2;
 
 /**
  *
  * @author dcama
  */
 public class Main {
-
-    /**
-     * @param args the command line arguments
-     */
+    
+    
     public static void main(String[] args) 
     {
-       Gestor g = new Gestor();
-       g.GestWindow(1);
+       Gestor2 g =new Gestor2();
+       g.gestInicial();
     }
-    
+
 }
