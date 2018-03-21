@@ -6,14 +6,8 @@
 package Ventanas;
 
 import Juego.Bullet;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
+import Juego.Setup;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -23,25 +17,34 @@ import javax.swing.*;
 
 /**
  *
- * @author dcama
+ * @author Daniel Camacho
  */
-public class Gestor2 
+public class Gestor2
 {
+    
+  //Elementos necesarios para el desrrollo de ventanas
   private  final String Titulo="Invaders";
   private  final Image Icono=Toolkit.getDefaultToolkit().getImage("Resources/Iconos/Icono.png");
   private  Font FuenteTitulo;
   private  Font FuenteMarc;
   private final  Color Btn=new Color(75,0,130);
-  private final Color LightG=new Color(124,252,0);
+  
+  //Creacion de las ventanas de la interfaz 
   private JFrame VentanaInicial= new JFrame();
   private JFrame VentanaStatics= new JFrame();
   private  JFrame VentanaDatos= new JFrame();
   private  JFrame VentanaJuego= new JFrame();
+  
+  //Fondos de las diferentes vetanas 
   private final Image Back=Toolkit.getDefaultToolkit().getImage("Resources/Backgrounds/Background.jpg");
   private Image Back2= Toolkit.getDefaultToolkit().getImage("Resources/Backgrounds/Back2.png");
+  
+  //Variables que almacenan los datos del jugador 
   private Image PlayerNav;
   private String PlayerNam;
+  //Indice para recorrer las listas de naves 
   private  int ind=0;
+  //Naves disponibles en el juego(dependiendo del tamaño se utilizan en diferentes partes del juego)
   private final Image Back1=Toolkit.getDefaultToolkit().getImage("Resources/Backgrounds/Back.png");
   private  final Image Nav1=Toolkit.getDefaultToolkit().getImage("Resources/Naves/Nave1.png");
   private  final Image Nav2=Toolkit.getDefaultToolkit().getImage("Resources/Naves/Nave2.png");
@@ -53,38 +56,50 @@ public class Gestor2
   private  final Image Nav4_1=Toolkit.getDefaultToolkit().getImage("Resources/Naves/Nave4_1.png");
   private final Image Right=Toolkit.getDefaultToolkit().getImage("Resources/Iconos/right.png");
   private final Image Left=Toolkit.getDefaultToolkit().getImage("Resources/Iconos/left.png");
+  private boolean cond;
+  //Arrays que contienen las diferentes naves 
   private  Image navselector[]=new Image[]{Nav1,Nav2,Nav3,Nav4};
   private  Image navselector2[]=new Image[]{Nav1_1,Nav2_1,Nav3_1,Nav4_1};
+  
+  //Label que permite ver y seleccionar la nave a gusto 
   private  JLabel Nav=new JLabel(new ImageIcon(navselector[ind]));
+  
+  //Textfield para ingresar el nombre del jugador 
   private JTextField Nombre= new JTextField(30);
+  
+  //Botones para rotar las naves en el label 
   private JButton right=new JButton(new ImageIcon(Right));
   private JButton left=new JButton(new ImageIcon(Left));
-  private JFrame Ventana= new JFrame();
+  
+  //Coordenadas de la nave
   private  int Navx=460;
   private  int Navy=605;
-  private  Canv canv= new Canv();
-  private int marc;
-  private String marcs=String.format("%013d",marc);
-  private final Image Shoot=Toolkit.getDefaultToolkit().getImage("Resources/disparos/Shoot.png");
-  private JLabel Punt= new JLabel(marcs);
-  private final Bullet bala= new Bullet(Navx+17,Navy);
-  private Update up;
-  private Teclado0 tec0= new Teclado0();
-  private Teclado2 tec2= new Teclado2();
-  private Timer time;
   
+  //JComponent en el que se desarrolla el juego 
+  private  Canvas canv= new Canvas();;
+  
+  //Marcador del juego 
+  private int marc;
+  
+  // Datos escritos que se proyectan en el marcador
+  private String marcs=String.format("%013d",marc);
+  
+  //Label que proyecta el marcador 
+  private JLabel Punt= new JLabel(marcs);
+  
+  //Objeto bala que es disparado desde la nave 
+  private final Bullet bala= new Bullet(Navx+17,Navy);
+ 
+  //Thread encargado de actualizar el Canv.
+  //private Update up;
+  //KeyListeners encargados de recibir los inputs del usuario
+  private Teclado0 tec0= new Teclado0();
+  private Teclado2 tec2= new Teclado2();  
     public Gestor2()
     {
-        time = new Timer(5,new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                
-            }
-        });
-       try
+      try
       {
+          //Fuente principal de la interfaz
           FuenteTitulo= Font.createFont(Font.TRUETYPE_FONT, new File("Resources/Fuentes/Furore.ttf"));
       }
       catch(Exception e)
@@ -94,15 +109,19 @@ public class Gestor2
         
       try
       {
+          //Fuente del marcador
         FuenteMarc= Font.createFont(Font.TRUETYPE_FONT, new File("Resources/Fuentes/Marcador.ttf"));  
       }
       catch(Exception e)
       {
          FuenteMarc=null; 
       }
-      up=new Update();
-      up.start();
+      //up=new Update();
+      //up.start();
     }
+    /**
+     * Método encargado de desplegar la ventana inicial en panatalla.
+     */
     public void gestInicial()
     {
       VentanaInicial.setTitle(Titulo);
@@ -115,13 +134,14 @@ public class Gestor2
       JLabel Uno= new JLabel(new ImageIcon(Back));
       Uno.setLayout(new BoxLayout(Uno,BoxLayout.Y_AXIS));
       
+      //Titulo principal
       JLabel Title= new JLabel("Invaders");
       Title.setFont(FuenteTitulo.deriveFont(Font.PLAIN,80));
       Title.setForeground(Color.GREEN);
       Title.setAlignmentX(JLabel.CENTER_ALIGNMENT);
       Uno.add(Title);
      
-
+      //Icono del juego
       JLabel Icon=new JLabel();
       Icon.setIcon(new ImageIcon("Resources/Iconos/Icono2.png"));
       Icon.setHorizontalAlignment(JLabel.CENTER);
@@ -129,6 +149,8 @@ public class Gestor2
       Uno.add(Icon);
       Uno.add(Box.createRigidArea(new Dimension(100,50)));
       
+      
+      //Boton para jugar
       JButton Jugar= new JButton("PLAY!");
       Jugar.setFont(FuenteTitulo.deriveFont(Font.PLAIN,20));
       Jugar.setForeground(Btn);
@@ -150,6 +172,7 @@ public class Gestor2
       Uno.add(Jugar);
       Uno.add(Box.createRigidArea(new Dimension(100,50)));
       
+      //Boton para ver los puntajes mas altos
       JButton Estadísticas= new JButton("Records");
       Estadísticas.setFont(FuenteTitulo.deriveFont(Font.PLAIN,20));
       Estadísticas.setForeground(Btn);
@@ -171,6 +194,7 @@ public class Gestor2
       Uno.add(Estadísticas);
       Uno.add(Box.createRigidArea(new Dimension(100,50)));
       
+      //Boton para salir del juego 
       JButton Salir= new JButton("Quit");
       Salir.setFont(FuenteTitulo.deriveFont(Font.PLAIN,20));
       Salir.setForeground(Btn);
@@ -194,6 +218,9 @@ public class Gestor2
       VentanaInicial.add(Uno,BorderLayout.CENTER);
       VentanaInicial.setVisible(true);
     }
+    /**
+     * Método wue permite desplegar la ventana de estadisticas
+     */
     public void gestStatics()
     {
     VentanaStatics.setTitle(Titulo);
@@ -238,7 +265,7 @@ public class Gestor2
     Label2.setBorder(BorderFactory.createMatteBorder(0, 4, 0, 0,Color.BLACK));
     Label2.setBounds(593,0,25,700);
     Panel3.add(Label2);
-    
+    //Titulo principal de la ventana
     JLabel Label3= new JLabel("GALAXY'S BEST PILOTS");
     Label3.setFont(FuenteTitulo.deriveFont(Font.PLAIN, 40));
     Label3.setForeground(Color.GREEN);
@@ -274,13 +301,14 @@ public class Gestor2
     Label8.setForeground(Color.GREEN);
     Label8.setBounds(40,500,1000,100);
     Panel3.add(Label8);
-    
+    //Boton para volver al menu principal 
     JButton Menu= new JButton("MAIN MENU");
     Menu.setForeground(Color.GREEN);
     Menu.setBackground(Btn);
     Menu.setFont(FuenteTitulo.deriveFont(Font.PLAIN,20));
     Menu.setBorder(BorderFactory.createMatteBorder(4,4,4,4,Color.BLACK));
     Menu.setFocusPainted(false);
+    Menu.setCursor(new Cursor(Cursor.HAND_CURSOR));
     Menu.setBounds(20,550, 200, 70);
     Menu.addActionListener(new ActionListener()
     {
@@ -293,13 +321,14 @@ public class Gestor2
         
     });
     Panel1.add(Menu);
-    
+    //Boton para salir del juego 
     JButton Abort = new JButton("ABORT");
     Abort.setForeground(Color.GREEN);
     Abort.setBackground(Btn);
     Abort.setFont(FuenteTitulo.deriveFont(Font.PLAIN,20));
     Abort.setBorder(BorderFactory.createMatteBorder(4,0,4,4,Color.BLACK));
     Abort.setFocusPainted(false);
+    Abort.setCursor(new Cursor(Cursor.HAND_CURSOR));
     Abort.setBounds(0,75, 200, 70);
     Abort.addActionListener(new ActionListener()
     {
@@ -327,6 +356,9 @@ public class Gestor2
     Panel2.add(Back4);
     VentanaStatics.setVisible(true);
     }
+    /**
+     * Metodo que permite la proyeccion de la ventana de toma de datos.
+     */
     public void gestDatos()
     {
         VentanaDatos.setTitle(Titulo);
@@ -367,10 +399,11 @@ public class Gestor2
         Nickname.setForeground(Color.GREEN);
         Nickname.setBounds(20, 50, 300, 30);
         Panel1.add(Nickname);
-
+        //Boton para salir del juego 
         JButton Abort= new JButton("Abort");
         Abort.setForeground(Color.GREEN);
         Abort.setBackground(Btn);
+        Abort.setCursor(new Cursor(Cursor.HAND_CURSOR));
         Abort.setFont(FuenteTitulo.deriveFont(Font.PLAIN,20));
         Abort.setBorder(BorderFactory.createMatteBorder(4,4,4,4,Color.BLACK));
         Abort.setFocusPainted(false);
@@ -384,11 +417,12 @@ public class Gestor2
             }
         });
         Panel1.add(Abort);
-
+        //Boton para jugar
         JButton Play= new JButton("PLAY!");
         Play.setForeground(Color.GREEN);
         Play.setBackground(Btn);
         Play.setFont(FuenteTitulo.deriveFont(Font.PLAIN,20));
+        Play.setCursor(new Cursor(Cursor.HAND_CURSOR));
         Play.setBorder(BorderFactory.createMatteBorder(4,4,4,4,Color.BLACK));
         Play.setFocusPainted(false);
         Play.setBounds(700,30, 250, 140);
@@ -400,15 +434,16 @@ public class Gestor2
                  setNav();
                  setName();
                  VentanaDatos.dispose();
-                 gestJuego();
+                 initJuego();
 
             }
         });
         Panel1.add(Play);
-
+        //Boton para volver al menu principal 
         JButton back= new JButton("MAIN MENU");
         back.setForeground(Btn);
         back.setBackground(Color.GREEN);
+        back.setCursor(new Cursor(Cursor.HAND_CURSOR));
         back.setFont(FuenteTitulo.deriveFont(Font.PLAIN,20));
         back.setBorder(BorderFactory.createMatteBorder(4,4,4,4,Color.BLACK));
         back.setFocusPainted(false);
@@ -461,7 +496,7 @@ public class Gestor2
 
         });
         Panel2.add(left);
-
+        //Titulo principal de la ventana
         JLabel Titulo2=new JLabel("SELECT A SPACESHIP");
         Titulo2.setFont(FuenteTitulo.deriveFont(Font.PLAIN, 40));
         Titulo2.setForeground(Color.GREEN);
@@ -469,8 +504,13 @@ public class Gestor2
         Panel2.add(Titulo2);
         VentanaDatos.setVisible(true);
        }
+    /**
+     * Metodo que permite desplegar la ventana del juego.
+     */
     public void gestJuego()
     {
+        canv.setPreferredSize(new Dimension(985,670));
+        canv.setBackground(Color.DARK_GRAY);
         VentanaJuego.setTitle(Titulo);
         VentanaJuego.setSize(1300,700);
         VentanaJuego.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -487,7 +527,7 @@ public class Gestor2
         fondo.setBackground(Color.DARK_GRAY);
         fondo.setPreferredSize(new Dimension(985,670));
         fondo.add(canv);
-        VentanaJuego.getContentPane().add(fondo,BorderLayout.EAST);
+        VentanaJuego.getContentPane().add(canv,BorderLayout.EAST);
 
         JPanel Panel1= new JPanel();
         Panel1.setPreferredSize(new Dimension(300,1000));
@@ -529,10 +569,11 @@ public class Gestor2
         Punt5.setForeground(Color.GREEN);
         Punt5.setFont(FuenteMarc.deriveFont(Font.PLAIN,15));
         Panel1.add(Punt5);
-
+        //Boton que permite salirse del juego
         JButton Abort= new JButton("Abort");
         Abort.setForeground(Color.GREEN);
         Abort.setBackground(Btn);
+        Abort.setCursor(new Cursor(Cursor.HAND_CURSOR));
         Abort.setFont(FuenteTitulo.deriveFont(Font.PLAIN,20));
         Abort.setBorder(BorderFactory.createMatteBorder(4,4,4,4,Color.BLACK));
         Abort.setFocusPainted(false);
@@ -561,7 +602,10 @@ public class Gestor2
         VentanaJuego.setVisible(true);
     }
            
-    
+    /**
+     * Método para hacer rotar las naves en el selector
+     * @param num: Indice de nave desplegada
+     */
     public  void changeShip(int num)
  {
   if(num==1)
@@ -587,7 +631,7 @@ public class Gestor2
       }
   }
  }
- 
+ //KeyListaner para mover la nave
   private class Teclado0 implements KeyListener
   {
         @Override
@@ -617,6 +661,7 @@ public class Gestor2
        
         }
   }
+  //KeyListener para cambiar de nave en el selector 
   private class Teclado implements KeyListener
   {
         @Override
@@ -643,7 +688,7 @@ public class Gestor2
        
         }
   }
-  
+  //KeyListener para disparar
   private class Teclado2 implements KeyListener
   {
         @Override
@@ -672,70 +717,77 @@ public class Gestor2
       
   
   }
-  
+  /**
+   * Metodo para fijar la nave que va a utilizar el jugador en la partida
+   */
   public void setNav()
   {
       PlayerNav=navselector2[ind];
   }
+  /**
+   * Metodo para guardar el nombre del jugador 
+   */
   public void setName()
   {
       PlayerNam=Nombre.getText();
   }
+  /**
+   * Metodo que retorna la nave que seleccionó el jugador 
+   * @return 
+   */
   public Image getNav()
   {
       return PlayerNav;
   }
+  /**
+   * Metodo para cambiar la nave que se muestra en el selector
+   */
   public  void changeLbl()
   {
      Nav.setIcon(new ImageIcon(navselector[ind]));
   }
+  /**
+   * Metodo para retornar las coordenadas en x de la nave
+   * @return Entero con las coordenadas de la nave en x
+   */
   public int getNavx()
   {
       return Navx;
   }
+  /**
+   * Metodo para retornar las coordenadas en y de la nave
+   * @return Entero con las coordenadas de la nave en y
+   */
   public int getNavy()
   {
       return Navy;
   }
-  public void setY()
-  {
-      
-  }
+  /**
+   * Metodo para retornar el objeto bala del juego;
+   * @return Objeto de tipo Bullet
+   */
   public Bullet getBull()
   {
       return bala;
   }
+  /**
+   * Metodo para agregar puntos al marcador 
+   * @param x cantidad entera de puntos a agregar 
+   */
   public void addMarc(int x)
   {
       marc+=x;
   }
+  /**
+   * Metodo para actualizar el marcador.
+   */
   public void updateMarcs()
   {
       Punt.setText(marcs);
   }
-public class Canv extends JComponent
-
-{
- private int cond=1;   
-    public Canv()
-      {
-          setPreferredSize(new Dimension(985,670)); 
-          
-   
-      }
-    
-      @Override
-      public void paint(Graphics g)
-      {
-          g.drawImage(PlayerNav,Navx,Navy,this);
-          if (bala.getCond()==1)
-          {
-          g.drawImage(bala.getImage(),bala.getBullX()+17,bala.getBullY(),this);
-          }
-      }
-}
-
-
+/**
+ * Thread que controla los disparos
+ */
 public class Shoot extends Thread
 {
     @Override
@@ -762,19 +814,23 @@ public class Shoot extends Thread
         VentanaJuego.addKeyListener(tec2);
     }
 }
-public class Update extends Thread
-{
-    @Override
-    public void run()
-    {
-        while(true)
-        {
-            canv.repaint();
-            updateMarcs();
-        }
-          
-    }
-}
+//Thread encargado de actualizar la pantalla
+//public class Update extends Thread
+//{
+//    @Override
+//    public void run()
+//    {
+//        while(true)
+//        {
+//            canv.repaint();
+//            updateMarcs();
+//            Navx=Navx;
+//            Navy=Navy;
+//        }
+//          
+//    }
+//}
+//Thread para mover la nave a la derecha
 public class Right extends Thread
 {
     @Override
@@ -790,6 +846,7 @@ public class Right extends Thread
               }
     }
 }
+//Thread para mover la nave a la izquierda
 public class Left extends Thread
 {
     @Override
@@ -805,6 +862,19 @@ public class Left extends Thread
               }
     }
 }
+ public Canvas getCanvas()
+ {
+     return canv;
+ }
+ public boolean getCond()
+ {
+     return cond;
+ }
+ public void initJuego()
+ {
+     Setup Inicio= new Setup();
+     Inicio.start();
+ }
 }
 
     

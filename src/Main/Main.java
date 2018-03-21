@@ -5,6 +5,7 @@
  */
 package Main;
 
+import Juego.Setup;
 import Ventanas.Gestor2;
 
 /**
@@ -16,7 +17,7 @@ public class Main {
     
     public static void main(String[] args) 
     {
-       Gestor2 g =new Gestor2();
+       Gestor2 g =Setup.getGest();
        g.gestInicial();
     }
 
