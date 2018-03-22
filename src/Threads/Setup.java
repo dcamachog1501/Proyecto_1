@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Juego;
+package Threads;
 
 import Ventanas.Gestor2;
 import java.awt.*;
@@ -20,7 +20,9 @@ public class Setup implements Runnable
     private Gestor2 gestor;
     private BufferStrategy buffer;
     private Graphics g;
-    private Image Nav1=Toolkit.getDefaultToolkit().getImage("Resources/Naves/Nave1.png");
+    private final Image Nav1=Toolkit.getDefaultToolkit().getImage("Resources/Naves/Nave1.png");
+    private int Navx;
+    private boolean cond;
     public Setup()
     {
         
@@ -29,6 +31,8 @@ public class Setup implements Runnable
     public Setup(Gestor2 g)
     {
         gestor = g;
+        Navx=gestor.getGame().getNavx();
+        cond=false;
     }
     
     public void init()
@@ -77,8 +81,16 @@ public class Setup implements Runnable
         g.clearRect(0,0,985,670);
         // inicio de graficacion
         System.out.println("Drawing");
+        if (cond==false)
+        {
         g.drawImage(gestor.getDatos().getNav(),gestor.getGame().getNavx(),gestor.getGame().getNavy(),gestor.getGame().getCanvas());
-        
+        }
+        else
+        {
+        System.out.println("Shooting");
+        g.drawImage(gestor.getDatos().getNav(),gestor.getGame().getNavx(),gestor.getGame().getNavy(),gestor.getGame().getCanvas());
+        g.drawImage(gestor.getGame().getBull().getImage(),gestor.getGame().getBull().getBullX(),gestor.getGame().getBull().getBullY(),gestor.getGame().getCanvas());
+        }
         //fin de graficacion
         buffer.show();
         g.dispose();
@@ -105,7 +117,27 @@ public class Setup implements Runnable
            
        }
     }
-
-    
+    public void chanCond()
+    {
+        if(cond==false)
+        {
+            cond=true;
+        }
+        else
+        {
+            cond=false;
+        }
+    }
+    public void Right()
+    {
+        if(gestor.getGame().getNavx()<920)
+              {
+               gestor.getGame().chnNavx(Navx+20);
+              }
+        else
+              {
+              gestor.getGame().chnNavx(920);
+              }
+    }
     
 }

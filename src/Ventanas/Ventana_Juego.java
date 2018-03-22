@@ -5,7 +5,11 @@
  */
 package Ventanas;
 
-import Juego.Bullet;
+import Componentes_Juego.Bullet;
+import Threads.Left;
+import Threads.Right;
+import Threads.Setup;
+import Threads.Shoot;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
@@ -21,8 +25,8 @@ import java.awt.event.KeyListener;
 import javax.swing.*;
 
 /**
- *
- * @author dcama
+ *Clase encargada del de desarrollo de ventanas de juego.
+ * @author Daniel Camacho
  */
 public class Ventana_Juego extends JFrame
 {
@@ -63,8 +67,9 @@ public class Ventana_Juego extends JFrame
     private Color color;
     private Font fuentem;
     private Gestor2 gest;
+    private Setup set;
     
-    Ventana_Juego(String title,Font FuenteT,Image back,Image Icono, Color Btn,Font FuenteM,Gestor2 gest)
+    Ventana_Juego(String title,Font FuenteT,Image back,Image Icono, Color Btn,Font FuenteM,Gestor2 gest,Setup set)
     {
        this.title=title;
        this.fuentem=FuenteM;
@@ -73,9 +78,13 @@ public class Ventana_Juego extends JFrame
        this.icono=Icono;
        this.color=Btn;
        this.gest=gest;
+       this.set=set;
        Init();
     }
-    
+  public Teclado2 getTec()
+  {
+      return tec2;
+  }
    /**
    * Metodo para retornar las coordenadas en x de la nave
    * @return Entero con las coordenadas de la nave en x
@@ -123,6 +132,22 @@ public class Ventana_Juego extends JFrame
     {
         return canv;
     }
+  /**
+   * Metodo para modificar el valo de las coordenadas de la nave en X
+     * @param x Valor entero que representa las nuevas coordenadas en X
+   */
+  public void chnNavx(int x)
+  {
+      Navx=x;
+  }
+  public void rem()
+  {
+      this.removeKeyListener(tec2);
+  }
+  public void adder()
+  {
+      this.addKeyListener(tec2);
+  }
   /**
    * Metodo que inicializa la ventana
    */
@@ -234,14 +259,14 @@ public class Ventana_Juego extends JFrame
             int code= e.getKeyCode();
             if(code==KeyEvent.VK_RIGHT)
             {
-              Right r= new Right();
-              r.start();
+              Right r= new Right(gest);
+              r.run();
               
             }
             else if(code==KeyEvent.VK_LEFT)
             {
-              Left l= new Left();
-              l.start();
+              Left l= new Left(gest);
+              l.run();
             }
         }
         @Override
@@ -262,7 +287,14 @@ public class Ventana_Juego extends JFrame
         @Override
         public void keyPressed(KeyEvent e) 
         {
-           
+            int code= e.getKeyCode();
+            if(code==KeyEvent.VK_F)
+            {
+              System.out.println("F");
+              Shoot s= new Shoot(gest);
+              s.run();
+              
+            }
         }
         @Override
         public void keyReleased(KeyEvent e) 
@@ -272,38 +304,4 @@ public class Ventana_Juego extends JFrame
       
   
   }
-  
-  //Thread para mover la nave a la derecha
-public class Right extends Thread
-{
-    @Override
-    public void run()
-    {
-        if(Navx<920)
-              {
-               Navx+=20;
-              }
-              else
-              {
-              Navx=920;
-              }
-    }
-}
-//Thread para mover la nave a la izquierda
-public class Left extends Thread
-{
-    @Override
-    public void run()
-    {
-        if(Navx>0)
-              {
-                Navx-=20;
-              }
-              else
-              {
-              Navx=0;
-              }
-    }
-}
-
 }

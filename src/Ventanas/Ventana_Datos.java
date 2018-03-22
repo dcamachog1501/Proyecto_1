@@ -5,7 +5,7 @@
  */
 package Ventanas;
 
-import Juego.Setup;
+import Threads.Setup;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -52,6 +52,7 @@ public class Ventana_Datos extends JFrame
   private  final Image Nav4_1=Toolkit.getDefaultToolkit().getImage("Resources/Naves/Nave4_1.png");
   private final Image Right=Toolkit.getDefaultToolkit().getImage("Resources/Iconos/right.png");
   private final Image Left=Toolkit.getDefaultToolkit().getImage("Resources/Iconos/left.png");
+  private Setup Inicio;
   private boolean cond;
   
   
@@ -103,7 +104,7 @@ public class Ventana_Datos extends JFrame
    */
   public void initJuego()
  {
-     Setup Inicio= new Setup(gest);
+     Inicio= new Setup(gest);
      Inicio.start();
  }
   
@@ -128,6 +129,10 @@ public class Ventana_Datos extends JFrame
   public Image getNav()
   {
       return PlayerNav;
+  }
+  public Setup getSet()
+  {
+      return Inicio;
   }
   
   /**

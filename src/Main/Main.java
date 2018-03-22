@@ -5,7 +5,7 @@
  */
 package Main;
 
-import Juego.Setup;
+import Threads.Setup;
 import Ventanas.Gestor2;
 
 /**
