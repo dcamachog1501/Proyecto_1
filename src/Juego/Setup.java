@@ -17,7 +17,7 @@ public class Setup implements Runnable
 {
     private Thread update;
     private boolean runnig;
-    private static Gestor2 gestor=new Gestor2();
+    private Gestor2 gestor;
     private BufferStrategy buffer;
     private Graphics g;
     private Image Nav1=Toolkit.getDefaultToolkit().getImage("Resources/Naves/Nave1.png");
@@ -25,6 +25,12 @@ public class Setup implements Runnable
     {
         
     }
+    
+    public Setup(Gestor2 g)
+    {
+        gestor = g;
+    }
+    
     public void init()
     {
         System.out.println("Initialized");
@@ -60,17 +66,18 @@ public class Setup implements Runnable
     public void render()
     {
         System.out.println("rendering");
-        buffer=gestor.getCanvas().getBufferStrategy();
+        buffer=gestor.getGame().getCanvas().getBufferStrategy();
         if(buffer==null)
                 {
-                    gestor.getCanvas().createBufferStrategy(3);
+                    gestor.getGame().getCanvas().createBufferStrategy(3);
+                    System.out.println(gestor.getGame().getBufferStrategy());
                     return;
                 }
         g=buffer.getDrawGraphics();
         g.clearRect(0,0,985,670);
         // inicio de graficacion
         System.out.println("Drawing");
-        g.drawImage(gestor.getNav(),gestor.getNavx(),gestor.getNavy(),gestor.getCanvas());
+        g.drawImage(gestor.getDatos().getNav(),gestor.getGame().getNavx(),gestor.getGame().getNavy(),gestor.getGame().getCanvas());
         
         //fin de graficacion
         buffer.show();
@@ -98,9 +105,7 @@ public class Setup implements Runnable
            
        }
     }
-    public static Gestor2 getGest()
-    {
-        return gestor;
-    }
+
+    
     
 }

@@ -17,7 +17,8 @@ public class Main {
     
     public static void main(String[] args) 
     {
-       Gestor2 g =Setup.getGest();
+       Gestor2 g = new Gestor2();
+       g.Init();
        g.gestInicial();
     }
 
