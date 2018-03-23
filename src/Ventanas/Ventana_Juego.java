@@ -5,7 +5,7 @@
  */
 package Ventanas;
 
-import Componentes_Juego.Bullet;
+import Componentes_Jugador.Bullet;
 import Threads.Left;
 import Threads.Right;
 import Threads.Setup;
@@ -30,12 +30,7 @@ import javax.swing.*;
  */
 public class Ventana_Juego extends JFrame
 {
-    //Coordenadas de la nave
-    private  int Navx=460;
-    private  int Navy=605;
-    
-    
-    //JComponent en el que se desarrolla el juego 
+    //Canvas en el que se desarrolla el juego 
     private  Canvas canv;
     
     
@@ -49,12 +44,7 @@ public class Ventana_Juego extends JFrame
     
     //Label que proyecta el marcador 
     private JLabel Punt= new JLabel(marcs);
-    
-    
-    //Objeto bala que es disparado desde la nave 
-    private final Bullet bala= new Bullet(Navx+17,Navy);
-            
-            
+   
     //KeyListeners encargados de recibir los inputs del usuario
     private Teclado0 tec0= new Teclado0();
     private Teclado2 tec2= new Teclado2();
@@ -85,30 +75,6 @@ public class Ventana_Juego extends JFrame
   {
       return tec2;
   }
-   /**
-   * Metodo para retornar las coordenadas en x de la nave
-   * @return Entero con las coordenadas de la nave en x
-   */
-  public int getNavx()
-  {
-      return Navx;
-  }
-  /**
-   * Metodo para retornar las coordenadas en y de la nave
-   * @return Entero con las coordenadas de la nave en y
-   */
-  public int getNavy()
-  {
-      return Navy;
-  }
-  /**
-   * Metodo para retornar el objeto bala del juego;
-   * @return Objeto de tipo Bullet
-   */
-  public Bullet getBull()
-  {
-      return bala;
-  }
   /**
    * Metodo para agregar puntos al marcador 
    * @param x cantidad entera de puntos a agregar 
@@ -132,14 +98,7 @@ public class Ventana_Juego extends JFrame
     {
         return canv;
     }
-  /**
-   * Metodo para modificar el valo de las coordenadas de la nave en X
-     * @param x Valor entero que representa las nuevas coordenadas en X
-   */
-  public void chnNavx(int x)
-  {
-      Navx=x;
-  }
+  
   public void rem()
   {
       this.removeKeyListener(tec2);
@@ -154,7 +113,7 @@ public class Ventana_Juego extends JFrame
   public void Init()
   {
         canv=new Canvas();
-        canv.setPreferredSize(new Dimension(985,670));
+        canv.setPreferredSize(new Dimension(985,720));
         canv.setBackground(Color.DARK_GRAY);
         setTitle(title);
         setSize(1300,700);
@@ -165,8 +124,8 @@ public class Ventana_Juego extends JFrame
         setResizable(false);
         setIconImage(icono);
         setFocusable(true);
-        addKeyListener(tec2);
         addKeyListener(tec0);
+        addKeyListener(tec2);
 
         JPanel fondo=new JPanel();
         fondo.setBackground(Color.DARK_GRAY);
@@ -259,13 +218,13 @@ public class Ventana_Juego extends JFrame
             int code= e.getKeyCode();
             if(code==KeyEvent.VK_RIGHT)
             {
-              Right r= new Right(gest);
-              r.run();
+              Thread r= new Thread(new Right(gest));
+              r.start();
               
             }
             else if(code==KeyEvent.VK_LEFT)
             {
-              Left l= new Left(gest);
+              Thread l= new Thread(new Left(gest));
               l.run();
             }
         }

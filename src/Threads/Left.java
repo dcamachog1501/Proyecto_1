@@ -19,21 +19,21 @@ private int Navx;
 public Left(Gestor2 gest)
 {
     this.gestor=gest;
-    this.Navx=gestor.getGame().getNavx();
+    this.Navx=gestor.getDatos().getSet().getMan().getNav().getNavx();
 }
     
 
     @Override
     public void run() 
     {
-        System.out.println("Left");
-      if(gestor.getGame().getNavx()>0)
+      System.out.println("Left");
+      if(gestor.getDatos().getSet().getMan().getNav().getNavx()>0)
               {
-               gestor.getGame().chnNavx(Navx-20);
+               gestor.getDatos().getSet().getMan().getNav().chnNavx(Navx-20);
               }
       else
               {
-              gestor.getGame().chnNavx(0);
+              gestor.getDatos().getSet().getMan().getNav().chnNavx(0);
               }
     }
     

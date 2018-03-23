@@ -5,6 +5,7 @@
  */
 package Threads;
 
+import Manager.GameManager;
 import Ventanas.Gestor2;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -15,14 +16,12 @@ import java.awt.image.BufferStrategy;
  */
 public class Setup implements Runnable
 {
+    private GameManager manager;
     private Thread update;
     private boolean runnig;
     private Gestor2 gestor;
     private BufferStrategy buffer;
     private Graphics g;
-    private final Image Nav1=Toolkit.getDefaultToolkit().getImage("Resources/Naves/Nave1.png");
-    private int Navx;
-    private boolean cond;
     public Setup()
     {
         
@@ -31,14 +30,13 @@ public class Setup implements Runnable
     public Setup(Gestor2 g)
     {
         gestor = g;
-        Navx=gestor.getGame().getNavx();
-        cond=false;
     }
     
     public void init()
     {
         System.out.println("Initialized");
         gestor.gestJuego();
+        manager=new GameManager(gestor);
     }
     public synchronized void start()
     {
@@ -63,10 +61,7 @@ public class Setup implements Runnable
             e.printStackTrace();
         }
     }
-    public void tick()
-    {
-        
-    }
+    
     public void render()
     {
         System.out.println("rendering");
@@ -80,17 +75,9 @@ public class Setup implements Runnable
         g=buffer.getDrawGraphics();
         g.clearRect(0,0,985,670);
         // inicio de graficacion
-        System.out.println("Drawing");
-        if (cond==false)
-        {
-        g.drawImage(gestor.getDatos().getNav(),gestor.getGame().getNavx(),gestor.getGame().getNavy(),gestor.getGame().getCanvas());
-        }
-        else
-        {
-        System.out.println("Shooting");
-        g.drawImage(gestor.getDatos().getNav(),gestor.getGame().getNavx(),gestor.getGame().getNavy(),gestor.getGame().getCanvas());
-        g.drawImage(gestor.getGame().getBull().getImage(),gestor.getGame().getBull().getBullX(),gestor.getGame().getBull().getBullY(),gestor.getGame().getCanvas());
-        }
+        
+        manager.render(g);
+        
         //fin de graficacion
         buffer.show();
         g.dispose();
@@ -109,35 +96,15 @@ public class Setup implements Runnable
            current=System.nanoTime();
            if(delta>=1)
            {
-               System.out.println("FPS: "+fps);
-              tick();
+              System.out.println("FPS: "+fps);
               render(); 
               delta--;
            }
            
        }
     }
-    public void chanCond()
+    public GameManager getMan()
     {
-        if(cond==false)
-        {
-            cond=true;
-        }
-        else
-        {
-            cond=false;
-        }
+        return manager;
     }
-    public void Right()
-    {
-        if(gestor.getGame().getNavx()<920)
-              {
-               gestor.getGame().chnNavx(Navx+20);
-              }
-        else
-              {
-              gestor.getGame().chnNavx(920);
-              }
-    }
-    
 }
