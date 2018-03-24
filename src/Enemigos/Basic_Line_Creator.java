@@ -22,7 +22,7 @@ public class Basic_Line_Creator
     {
      this.Head=null;
      this.len=0;
-     this.lenmax=5;
+     this.lenmax=7;
      this.enmx=660;
      this.enmy=200;
     }

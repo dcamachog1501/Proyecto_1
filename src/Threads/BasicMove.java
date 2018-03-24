@@ -19,19 +19,23 @@ public class BasicMove implements Runnable
 {
     private Basic_Line_Creator hilera;
     private Basic temp;
+    private Gestor2 gestor;
     public BasicMove()
     {
         
     }
-    public BasicMove(Basic_Line_Creator hilera)
+    public BasicMove(Basic_Line_Creator hilera,Gestor2 gest)
     {
         this.hilera=hilera;
+        this.gestor=gest;
         
     }
     @Override
     public void run() 
     {
-            if(hilera.getHead().getX()<=430)
+        while(true)
+        {
+            if(hilera.getHead().getX()<=630)
             {
                 temp=hilera.getHead();
                 while(temp!=null)
@@ -41,8 +45,9 @@ public class BasicMove implements Runnable
                     temp.chnY();
                     temp=temp.getNext();
                 }
+                
             }
-            if(hilera.getHead().getX()>=910)
+            else if(hilera.getHead().getX()>=910)
             {
                 temp=hilera.getHead();
                 while(temp!=null)
@@ -51,6 +56,7 @@ public class BasicMove implements Runnable
                     temp.chnX();
                     temp.chnY();
                     temp=temp.getNext();
+                    
                 }
             }
             else
@@ -61,11 +67,16 @@ public class BasicMove implements Runnable
                     temp.chnX();
                     temp=temp.getNext();
                 }
-            try {
-                Thread.sleep(300);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(BasicMove.class.getName()).log(Level.SEVERE, null, ex);
+                
+                    
             }
+        try {
+            Thread.sleep(300);
+            } 
+        catch (InterruptedException ex) 
+            {
             }
+            
         }
-    }
+      }
+}

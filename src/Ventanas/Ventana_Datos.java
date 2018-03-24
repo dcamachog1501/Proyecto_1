@@ -106,6 +106,7 @@ public class Ventana_Datos extends JFrame
  {
      Inicio= new Setup(gest);
      Inicio.start();
+     gest.getGame().moveStarter();
  }
   
   /**

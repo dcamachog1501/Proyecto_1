@@ -5,6 +5,8 @@
  */
 package Threads;
 
+import Enemigos.Basic;
+import Enemigos.Basic_Line_Creator;
 import Manager.GameManager;
 import Ventanas.Gestor2;
 import java.awt.*;
@@ -12,7 +14,7 @@ import java.awt.image.BufferStrategy;
 
 /**
  *
- * @author dcama
+ * @author Daniel Camacho 
  */
 public class Setup implements Runnable
 {
@@ -22,6 +24,7 @@ public class Setup implements Runnable
     private Gestor2 gestor;
     private BufferStrategy buffer;
     private Graphics g;
+    private double TimeperTick;
     public Setup()
     {
         
@@ -37,6 +40,7 @@ public class Setup implements Runnable
         System.out.println("Initialized");
         gestor.gestJuego();
         manager=new GameManager(gestor);
+        
     }
     public synchronized void start()
     {
@@ -87,7 +91,7 @@ public class Setup implements Runnable
     {
        init();
        int fps= 60;
-       double TimeperTick=1000000000/fps;
+       TimeperTick=1000000000/fps;
        double delta=0;
        long current=System.nanoTime();
        while(runnig)
@@ -107,4 +111,9 @@ public class Setup implements Runnable
     {
         return manager;
     }
+    public double getTime()
+    {
+        return TimeperTick;
+    }
+    
 }

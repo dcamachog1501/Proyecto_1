@@ -8,7 +8,6 @@ package Manager;
 import Componentes_Jugador.Nave;
 import Componentes_Jugador.Bullet;
 import Enemigos.Basic_Line_Creator;
-import Threads.BasicMove;
 import Ventanas.Gestor2;
 import java.awt.*;
 
@@ -23,8 +22,7 @@ public class GameManager
     private Nave nave;
     private Bullet bala;
     private boolean cond;
-    private Basic_Line_Creator basic;
-    private Thread move;
+    
     
     public GameManager()
     {
@@ -35,14 +33,12 @@ public class GameManager
         this.gestor=gest;
         this.nave=new Nave(gestor);
         this.bala=new Bullet(gestor,nave.getNavx(),nave.getNavy());
-        basic=new Basic_Line_Creator();
-        basic.createLine();
-        move=new Thread(new BasicMove());
+        
     }
     public void render(Graphics g)
     {
         System.out.println("Drawing");
-        basic.Render(g,gestor.getGame().getCanvas());
+        gestor.getGame().getBasic().Render(g,gestor.getGame().getCanvas());
         if (cond==false)
         {
         nave.render(g);
@@ -53,7 +49,6 @@ public class GameManager
         nave.render(g);
         bala.Render(g);
         }
-        move.start();
     }
     public Nave getNav()
     {
@@ -75,8 +70,5 @@ public class GameManager
    {
        return bala;
    }
-   public Basic_Line_Creator getBasic()
-   {
-       return basic;
-   }
+   
 }

@@ -6,6 +6,8 @@
 package Ventanas;
 
 import Componentes_Jugador.Bullet;
+import Enemigos.Basic_Line_Creator;
+import Threads.BasicMove;
 import Threads.Left;
 import Threads.Right;
 import Threads.Setup;
@@ -59,6 +61,12 @@ public class Ventana_Juego extends JFrame
     private Gestor2 gest;
     private Setup set;
     
+    //Thread que permite el movimiento continuo de los enemigos.
+    private Thread mover;
+    private BasicMove move;
+    
+    private Basic_Line_Creator basic;
+    
     Ventana_Juego(String title,Font FuenteT,Image back,Image Icono, Color Btn,Font FuenteM,Gestor2 gest,Setup set)
     {
        this.title=title;
@@ -69,8 +77,15 @@ public class Ventana_Juego extends JFrame
        this.color=Btn;
        this.gest=gest;
        this.set=set;
+       basic=new Basic_Line_Creator();
+       basic.createLine();
+       this.move= new BasicMove(basic,gest);
        Init();
     }
+  public Basic_Line_Creator getBasic()
+   {
+       return basic;
+   }
   public Teclado2 getTec()
   {
       return tec2;
@@ -106,6 +121,15 @@ public class Ventana_Juego extends JFrame
   public void adder()
   {
       this.addKeyListener(tec2);
+  }
+  public void moveStarter()
+  {
+      mover= new Thread(move);
+      mover.start();
+  }
+  public Thread getMover()
+  {
+      return mover;
   }
   /**
    * Metodo que inicializa la ventana
@@ -202,7 +226,8 @@ public class Ventana_Juego extends JFrame
         JLabel Punt6= new JLabel();
         Punt6.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("Resources/Backgrounds/Back2.png")));
         Punt6.setBounds(0,320,292,500);
-        Panel1.add(Punt6); 
+        Panel1.add(Punt6);
+        
   }
   //KeyListaner para mover la nave
   private class Teclado0 implements KeyListener
