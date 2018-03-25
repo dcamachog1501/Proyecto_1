@@ -5,6 +5,8 @@
  */
 package Threads;
 
+import Componentes_Jugador.Bullet;
+import Componentes_Jugador.Nave;
 import Enemigos.Basic;
 import Enemigos.Basic_Line_Creator;
 import Manager.GameManager;
@@ -24,6 +26,8 @@ public class Setup implements Runnable
     private Gestor2 gestor;
     private BufferStrategy buffer;
     private Graphics g;
+    private Bullet bala;
+    private Nave nave;
     private double TimeperTick;
     public Setup()
     {
@@ -33,13 +37,15 @@ public class Setup implements Runnable
     public Setup(Gestor2 g)
     {
         gestor = g;
+        nave= new Nave(gestor);
+        bala= new Bullet(gestor,nave.getNavx(),nave.getNavy());
     }
     
     public void init()
     {
         System.out.println("Initialized");
         gestor.gestJuego();
-        manager=new GameManager(gestor);
+        manager=new GameManager(gestor,getBull(),getNave());
         
     }
     public synchronized void start()
@@ -115,5 +121,12 @@ public class Setup implements Runnable
     {
         return TimeperTick;
     }
-    
+    public Bullet getBull()
+    {
+        return bala;
+    }
+    public Nave getNave()
+    {
+        return nave;
+    }
 }

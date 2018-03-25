@@ -28,11 +28,11 @@ public class GameManager
     {
         
     }
-    public GameManager(Gestor2 gest)
+    public GameManager(Gestor2 gest,Bullet bala,Nave nave)
     {
         this.gestor=gest;
-        this.nave=new Nave(gestor);
-        this.bala=new Bullet(gestor,nave.getNavx(),nave.getNavy());
+        this.nave=nave;
+        this.bala=bala;
         
     }
     public void render(Graphics g)

@@ -24,8 +24,8 @@ public class Shoot implements Runnable
     public Shoot(Gestor2 gest)
     {
         this.gestor=gest;
-        this.Navx=gestor.getDatos().getSet().getMan().getNav().getNavx();
-        this.Navy=gestor.getDatos().getSet().getMan().getNav().getNavy();
+        this.Navx=gestor.getDatos().getSet().getNave().getNavx();
+        this.Navy=gestor.getDatos().getSet().getNave().getNavy();
         this.set=gestor.getDatos().getSet();
         this.tec2=gestor.getGame().getTec();
     }        
@@ -34,12 +34,12 @@ public class Shoot implements Runnable
     {
         set.getMan().chanCond();
         gestor.getGame().rem();
-        set.getMan().getBull().setBullx(0);
-        set.getMan().getBull().setBullx(Navx+17);
+        set.getBull().setBullx(0);
+        set.getBull().setBullx(Navx+17);
         while(set.getMan().getBull().getBully()>0)
         {
             try {
-                set.getMan().getBull().chnBully(-25);
+                set.getBull().chnBully(-25);
                 Thread.sleep(10);
                 }   
                 catch (Exception e) 
