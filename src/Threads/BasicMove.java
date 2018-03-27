@@ -35,6 +35,20 @@ public class BasicMove implements Runnable
     {
         while(true)
         {
+            Basic temp=hilera.getHead();
+            int ind=0;
+            while(temp!=null)
+            {
+                if(temp.getRec().intersects(gestor.getDatos().getSet().getBull().getRecb())==true)
+                {
+                    System.out.println("Killing");
+                    hilera.eliminate(ind);
+                    break;
+                }
+                temp=temp.getNext();
+                ++ind;
+            }
+            
             if(hilera.getHead().getX()<=630)
             {
                 temp=hilera.getHead();

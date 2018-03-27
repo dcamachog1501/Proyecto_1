@@ -14,11 +14,12 @@ import java.awt.*;
 public class Basic 
 {
    private Basic next;
-   private final Image face;
+   private Image face;
    private int enx;
    private int eny;
    private final int health;
    private int dir=1;
+   private Rectangle rec;
    Basic(int x, int y)
    {
        this.enx=x;
@@ -26,6 +27,7 @@ public class Basic
        this.health=1;
        this.next=null;
        this.face=Toolkit.getDefaultToolkit().getImage("Resources/Enemigos/Basic.png");
+       this.rec= new Rectangle(enx,eny,64,64);
    }
    public void setNext(Basic enm)
    {
@@ -72,5 +74,17 @@ public class Basic
        {
            dir=1;
        }
+   }
+   public Rectangle getRec()
+   {
+       return rec;
+   }
+   public void chnFace()
+   {
+       this.face=null;
+   }
+   public void chnRec()
+   {
+       this.rec= new Rectangle(this.getX(),this.getY(),64,64);
    }
 }

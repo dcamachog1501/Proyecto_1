@@ -5,8 +5,6 @@
  */
 package Ventanas;
 
-import Componentes_Jugador.Bullet;
-import Componentes_Jugador.Nave;
 import Threads.Setup;
 import java.awt.*;
 import java.awt.event.*;
@@ -68,7 +66,6 @@ public class Ventana_Datos extends JFrame
   private Font fuentem;
   private Gestor2 gest;
   private Image back2;
-  
   public Ventana_Datos(String title,Font Fuente,Image back,Image Icono, Color Btn,Gestor2 gest)
   {
     this.title=title;
@@ -228,6 +225,7 @@ public class Ventana_Datos extends JFrame
                  setNav();
                  setName();
                  dispose();
+                 System.out.println(Nombre.getText());
                  initJuego();
 
             }

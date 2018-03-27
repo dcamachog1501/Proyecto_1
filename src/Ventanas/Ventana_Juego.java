@@ -67,6 +67,8 @@ public class Ventana_Juego extends JFrame
     
     private Basic_Line_Creator basic;
     
+    private boolean cond;
+    
     Ventana_Juego(String title,Font FuenteT,Image back,Image Icono, Color Btn,Font FuenteM,Gestor2 gest,Setup set)
     {
        this.title=title;
@@ -80,6 +82,7 @@ public class Ventana_Juego extends JFrame
        basic=new Basic_Line_Creator();
        basic.createLine();
        this.move= new BasicMove(basic,gest);
+       this.cond=false;
        Init();
     }
   public Basic_Line_Creator getBasic()
@@ -131,6 +134,21 @@ public class Ventana_Juego extends JFrame
   {
       return mover;
   }
+   public void chanCond()
+    {
+        if(cond==false)
+        {
+            cond=true;
+        }
+        else
+        {
+            cond=false;
+        }
+    }
+    public boolean getCond()
+   {
+       return cond; 
+   }
   /**
    * Metodo que inicializa la ventana
    */
@@ -277,7 +295,6 @@ public class Ventana_Juego extends JFrame
               System.out.println("F");
               Shoot s= new Shoot(gest);
               s.run();
-              
             }
         }
         @Override

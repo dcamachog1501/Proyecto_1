@@ -18,15 +18,18 @@ public class Bullet
     private final Gestor2 gestor;
     private int Bullx;
     private int Bully;
+    private Rectangle recb;
     public Bullet(Gestor2 gest,int x, int y)
     {
         this.gestor=gest;
         this.Bullx=x;
         this.Bully=y;
+        this.recb= new Rectangle(Bullx,Bully,24,24);
     }
     public void Render(Graphics g)
     {
       g.drawImage(Shoot, Bullx, Bully,gestor.getGame().getCanvas());
+    
     }
     public void chnBullx(int x)
     {
@@ -52,5 +55,12 @@ public class Bullet
     {
         return Bully;
     }
-
+    public Rectangle getRecb()
+    {
+        return recb;
+    }
+    public void chnRecb()
+    {
+        this.recb=new Rectangle(this.getBullx(),this.getBully(),24,24);
+    }
 }   

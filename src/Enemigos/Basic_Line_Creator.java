@@ -70,6 +70,7 @@ public class Basic_Line_Creator
        while(temp!=null)
        {
            g.drawImage(temp.getFace(),temp.getX(),temp.getY(),c);
+           temp.chnRec();
            temp=temp.getNext();
            
        }
@@ -81,5 +82,19 @@ public class Basic_Line_Creator
     public Basic getHead()
     {
         return Head;
+    }
+    public void eliminate(int x)
+    {
+       Basic temp= this.getHead();
+       int ind=0;
+       while(temp!=null)
+       {
+           if(ind==x)
+           {
+               temp.chnFace();
+               break;
+           }
+           ind++;
+       }
     }
 }

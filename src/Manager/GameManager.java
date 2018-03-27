@@ -21,7 +21,7 @@ public class GameManager
     private Gestor2 gestor;
     private Nave nave;
     private Bullet bala;
-    private boolean cond;
+    
     
     
     public GameManager()
@@ -39,7 +39,7 @@ public class GameManager
     {
         System.out.println("Drawing");
         gestor.getGame().getBasic().Render(g,gestor.getGame().getCanvas());
-        if (cond==false)
+        if (gestor.getGame().getCond()==false)
         {
         nave.render(g);
         }
@@ -54,21 +54,10 @@ public class GameManager
     {
         return nave;
     }
-    
-   public void chanCond()
-    {
-        if(cond==false)
-        {
-            cond=true;
-        }
-        else
-        {
-            cond=false;
-        }
-    }
    public Bullet getBull()
    {
        return bala;
    }
+  
    
 }
