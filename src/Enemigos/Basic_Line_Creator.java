@@ -89,12 +89,21 @@ public class Basic_Line_Creator
        int ind=0;
        while(temp!=null)
        {
-           if(ind==x)
+           if(x==0)
            {
-               temp.chnFace();
+               this.Head=temp.getNext();
                break;
            }
+           else if(ind+1==x)
+           {
+               temp.setNext(temp.getNext().getNext());
+               break;
+           }
+           else
+           {
            ind++;
+           temp=temp.getNext();
+           }
        }
     }
 }

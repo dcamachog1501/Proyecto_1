@@ -5,6 +5,7 @@
  */
 package Threads;
 
+import Componentes_Jugador.Bullet;
 import Enemigos.Basic;
 import Ventanas.Gestor2;
 import java.awt.event.KeyListener;
@@ -43,17 +44,9 @@ public class Shoot implements Runnable
             int ind=0;
             while(temp!=null)
             {
-                System.out.println("Coord HEAD");
-                System.out.println(gestor.getGame().getBasic().getHead().getRec().x);
-                System.out.println(gestor.getGame().getBasic().getHead().getRec().y);
-                System.out.println("              ");
-                System.out.println("Coord BULLET");
-                System.out.println(gestor.getDatos().getSet().getBull().getRecb().x);
-                System.out.println(gestor.getDatos().getSet().getBull().getRecb().y);
-                System.out.println("               ");
-
-
-                if(temp.getRec().intersects(gestor.getDatos().getSet().getBull().getRecb())==true)
+                Bullet b=set.getBull();
+                if(b.getBullx()<temp.getX()+64&& b.getBullx()+24>temp.getX()
+                   && b.getBully()<temp.getY()+64&&b.getBully()+24> temp.getY())
                 {
                     System.out.println("Killing");
                     gestor.getGame().getBasic().eliminate(ind);

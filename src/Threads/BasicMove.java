@@ -5,6 +5,7 @@
  */
 package Threads;
 
+import Componentes_Jugador.Bullet;
 import Enemigos.Basic_Line_Creator;
 import Enemigos.Basic;
 import Ventanas.Gestor2;
@@ -39,7 +40,9 @@ public class BasicMove implements Runnable
             int ind=0;
             while(temp!=null)
             {
-                if(temp.getRec().intersects(gestor.getDatos().getSet().getBull().getRecb())==true)
+                Bullet b= gestor.getDatos().getSet().getBull();
+                if(b.getBullx()<temp.getX()+64&& b.getBullx()+24>temp.getX()
+                   && b.getBully()<temp.getY()+64&&b.getBully()+24> temp.getY())
                 {
                     System.out.println("Killing");
                     hilera.eliminate(ind);
@@ -93,4 +96,5 @@ public class BasicMove implements Runnable
             
         }
       }
+}
 }

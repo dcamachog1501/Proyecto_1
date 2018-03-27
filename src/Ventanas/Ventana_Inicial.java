@@ -23,7 +23,9 @@ public class Ventana_Inicial extends JFrame
     private Color color;
     private Font fuentem;
     private Gestor2 gest;
-    public Ventana_Inicial() {
+    public Ventana_Inicial() 
+    {
+        
     }
     
     public Ventana_Inicial(String title,Font Fuente,Image back,Image Icono, Color Btn, Gestor2 gest)
@@ -39,7 +41,7 @@ public class Ventana_Inicial extends JFrame
     }
     public void Init()
     {
-       setTitle(title);
+      setTitle(title);
       setResizable(false);
       setUndecorated(true);
       setIconImage(icono);
