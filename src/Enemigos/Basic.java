@@ -19,15 +19,26 @@ public class Basic
    private int eny;
    private final int health;
    private int dir=1;
+   private int sup;
+   private int inf;
    private Rectangle rec;
-   Basic(int x, int y)
+   Basic(int x, int y,int sup,int inf)
    {
        this.enx=x;
        this.eny=y;
        this.health=1;
        this.next=null;
        this.face=Toolkit.getDefaultToolkit().getImage("Resources/Enemigos/Basic.png");
-       this.rec= new Rectangle(enx,eny,64,64);
+       this.sup=sup;
+       this.inf=inf;
+   }
+   public int getSup()
+   {
+       return sup;
+   }
+   public int getInf()
+   {
+       return inf;
    }
    public void setNext(Basic enm)
    {

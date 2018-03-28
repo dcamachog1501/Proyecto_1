@@ -1,16 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Threads;
 
 import Componentes_Jugador.Bullet;
 import Enemigos.Basic_Line_Creator;
 import Enemigos.Basic;
 import Ventanas.Gestor2;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -52,7 +46,7 @@ public class BasicMove implements Runnable
                 ++ind;
             }
             
-            if(hilera.getHead().getX()<=630)
+            if(hilera.getHead().getX()<=hilera.getHead().getInf())
             {
                 temp=hilera.getHead();
                 while(temp!=null)
@@ -64,7 +58,7 @@ public class BasicMove implements Runnable
                 }
                 
             }
-            else if(hilera.getHead().getX()>=910)
+            else if(hilera.getHead().getX()>=hilera.getHead().getSup())
             {
                 temp=hilera.getHead();
                 while(temp!=null)
@@ -97,4 +91,4 @@ public class BasicMove implements Runnable
         }
       }
 }
-}
+

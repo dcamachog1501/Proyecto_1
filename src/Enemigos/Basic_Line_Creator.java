@@ -18,6 +18,9 @@ public class Basic_Line_Creator
     private final int lenmax;
     private int enmx;
     private int enmy;
+    private int elim;
+    private int sup;
+    private int inf;
     public Basic_Line_Creator()
     {
      this.Head=null;
@@ -25,6 +28,9 @@ public class Basic_Line_Creator
      this.lenmax=7;
      this.enmx=660;
      this.enmy=200;
+     this.elim=0;
+     this.sup=910;
+     this.inf=630;
     }
     public int isEmpty()
     {
@@ -60,8 +66,9 @@ public class Basic_Line_Creator
     {
       while(len<lenmax)
       {
-          this.adder(new Basic(enmx,enmy));
+          this.adder(new Basic(enmx,enmy,sup,inf));
           enmx-=100;
+          inf-=100;
       }
     }
     public void Render(Graphics g,Canvas c)
@@ -92,11 +99,13 @@ public class Basic_Line_Creator
            if(x==0)
            {
                this.Head=temp.getNext();
+               this.elim+=1;
                break;
            }
            else if(ind+1==x)
            {
                temp.setNext(temp.getNext().getNext());
+               this.elim+=1;
                break;
            }
            else
