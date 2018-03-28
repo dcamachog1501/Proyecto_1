@@ -183,7 +183,7 @@ public class Ventana_Juego extends JFrame
 
         JPanel Panel1= new JPanel();
         Panel1.setPreferredSize(new Dimension(300,1000));
-        Panel1.setBackground(Color.DARK_GRAY);
+        Panel1.setBackground(Color.BLACK);
         Panel1.setBorder(BorderFactory.createMatteBorder(4,0,0,8,Color.BLACK));
         add(Panel1,BorderLayout.WEST);
 
@@ -200,7 +200,6 @@ public class Ventana_Juego extends JFrame
         Punt2.setBackground(Color.BLACK);
         Punt2.setIcon(new ImageIcon(basic.getCurrent()));
         Punt2.setOpaque(true);
-        Punt2.setBorder(BorderFactory.createMatteBorder(4,4,4,4, Color.DARK_GRAY));
         Punt2.setBounds(12,75,266,250);
         Punt2.setForeground(Color.GREEN);
         Panel1.add(Punt2);
