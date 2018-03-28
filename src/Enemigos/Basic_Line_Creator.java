@@ -21,6 +21,7 @@ public class Basic_Line_Creator
     private int elim;
     private int sup;
     private int inf;
+    private Image current;
     public Basic_Line_Creator()
     {
      this.Head=null;
@@ -31,6 +32,7 @@ public class Basic_Line_Creator
      this.elim=0;
      this.sup=910;
      this.inf=630;
+     this.current=Toolkit.getDefaultToolkit().getImage("Resources/Current Icons/Basic.png");
     }
     public int isEmpty()
     {
@@ -62,6 +64,10 @@ public class Basic_Line_Creator
             }
         }
     }
+    public Image getCurrent()
+    {
+        return current;
+    }
     public void createLine()
     {
       while(len<lenmax)
@@ -77,7 +83,6 @@ public class Basic_Line_Creator
        while(temp!=null)
        {
            g.drawImage(temp.getFace(),temp.getX(),temp.getY(),c);
-           temp.chnRec();
            temp=temp.getNext();
            
        }
@@ -99,13 +104,14 @@ public class Basic_Line_Creator
            if(x==0)
            {
                this.Head=temp.getNext();
-               this.elim+=1;
+               //this.elim+=1;
+               
                break;
            }
            else if(ind+1==x)
            {
                temp.setNext(temp.getNext().getNext());
-               this.elim+=1;
+               //this.elim+=1;
                break;
            }
            else

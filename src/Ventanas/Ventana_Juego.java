@@ -41,25 +41,25 @@ public class Ventana_Juego extends JFrame
     
     
     // Datos escritos que se proyectan en el marcador
-    private String marcs=String.format("%013d",marc);
+    private String marcs;
     
     
     //Label que proyecta el marcador 
-    private JLabel Punt= new JLabel(marcs);
+    private JLabel Punt;
    
     //KeyListeners encargados de recibir los inputs del usuario
-    private Teclado0 tec0= new Teclado0();
-    private Teclado2 tec2= new Teclado2();
+    private final Teclado0 tec0;
+    private final Teclado2 tec2;
     
     //Atributos de la ventana
-    private String title;
-    private Font fuentet;
-    private Image back;
-    private Image icono;
-    private Color color;
-    private Font fuentem;
-    private Gestor2 gest;
-    private Setup set;
+    private final String title;
+    private final Font fuentet;
+    private final Image back;
+    private final Image icono;
+    private final Color color;
+    private final Font fuentem;
+    private final Gestor2 gest;
+    private final Setup set;
     
     //Thread que permite el movimiento continuo de los enemigos.
     private Thread mover;
@@ -71,6 +71,8 @@ public class Ventana_Juego extends JFrame
     
     Ventana_Juego(String title,Font FuenteT,Image back,Image Icono, Color Btn,Font FuenteM,Gestor2 gest,Setup set)
     {
+       this.tec0=new Teclado0();
+       this.tec2= new Teclado2();
        this.title=title;
        this.fuentem=FuenteM;
        this.fuentet=FuenteT;
@@ -79,7 +81,10 @@ public class Ventana_Juego extends JFrame
        this.color=Btn;
        this.gest=gest;
        this.set=set;
-       basic=new Basic_Line_Creator();
+       this.marc=0;
+       this.marcs=String.format("%013d",marc);
+       this.Punt= new JLabel(marcs);
+       this.basic=new Basic_Line_Creator();
        basic.createLine();
        this.move= new BasicMove(basic,gest);
        this.cond=false;
@@ -106,6 +111,7 @@ public class Ventana_Juego extends JFrame
    */
   public void updateMarcs()
     {
+        marcs=String.format("%013d",marc);
         Punt.setText(marcs);
     }
   /**
@@ -192,9 +198,10 @@ public class Ventana_Juego extends JFrame
 
         JLabel Punt2= new JLabel();
         Punt2.setBackground(Color.BLACK);
+        Punt2.setIcon(new ImageIcon(basic.getCurrent()));
         Punt2.setOpaque(true);
         Punt2.setBorder(BorderFactory.createMatteBorder(4,4,4,4, Color.DARK_GRAY));
-        Punt2.setBounds(0,75,292,250);
+        Punt2.setBounds(12,75,266,250);
         Punt2.setForeground(Color.GREEN);
         Panel1.add(Punt2);
 
@@ -243,7 +250,7 @@ public class Ventana_Juego extends JFrame
 
         JLabel Punt6= new JLabel();
         Punt6.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage("Resources/Backgrounds/Back2.png")));
-        Punt6.setBounds(0,320,292,500);
+        Punt6.setBounds(0,330,292,450);
         Panel1.add(Punt6);
         
   }

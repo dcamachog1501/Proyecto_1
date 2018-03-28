@@ -50,6 +50,8 @@ public class Shoot implements Runnable
                 {
                     System.out.println("Killing");
                     gestor.getGame().getBasic().eliminate(ind);
+                    gestor.getGame().addMarc(temp.getPunt());
+                    gestor.getGame().updateMarcs();
                     break;
                 }
                 temp=temp.getNext();

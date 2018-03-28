@@ -21,7 +21,7 @@ public class Basic
    private int dir=1;
    private int sup;
    private int inf;
-   private Rectangle rec;
+   private int punt;
    Basic(int x, int y,int sup,int inf)
    {
        this.enx=x;
@@ -31,6 +31,7 @@ public class Basic
        this.face=Toolkit.getDefaultToolkit().getImage("Resources/Enemigos/Basic.png");
        this.sup=sup;
        this.inf=inf;
+       this.punt=100;
    }
    public int getSup()
    {
@@ -86,16 +87,8 @@ public class Basic
            dir=1;
        }
    }
-   public Rectangle getRec()
+   public int getPunt()
    {
-       return rec;
-   }
-   public void chnFace()
-   {
-       this.face=null;
-   }
-   public void chnRec()
-   {
-       this.rec= new Rectangle(this.getX(),this.getY(),64,64);
+      return punt; 
    }
 }
