@@ -2,8 +2,8 @@
 package Threads;
 
 import Componentes_Jugador.Bullet;
-import Enemigos.Basic_Line_Creator;
-import Enemigos.Basic;
+import Enemigos.Enemy;
+import Hileras.Line;
 import Ventanas.Gestor2;
 
 /**
@@ -12,14 +12,14 @@ import Ventanas.Gestor2;
  */
 public class BasicMove implements Runnable
 {
-    private Basic_Line_Creator hilera;
-    private Basic temp;
+    private Line hilera;
+    private Enemy temp;
     private Gestor2 gestor;
     public BasicMove()
     {
         
     }
-    public BasicMove(Basic_Line_Creator hilera,Gestor2 gest)
+    public BasicMove(Line hilera,Gestor2 gest)
     {
         this.hilera=hilera;
         this.gestor=gest;
@@ -30,7 +30,7 @@ public class BasicMove implements Runnable
     {
         while(true)
         {
-            Basic temp=hilera.getHead();
+            Enemy temp=(Enemy) hilera.getHead();
             int ind=0;
             while(temp!=null)
             {
@@ -42,47 +42,47 @@ public class BasicMove implements Runnable
                     hilera.eliminate(ind);
                     break;
                 }
-                temp=temp.getNext();
+                temp=(Enemy) temp.getNext();
                 ++ind;
             }
             
             if(hilera.getHead().getX()<=hilera.getHead().getInf())
             {
-                temp=hilera.getHead();
+                temp=(Enemy) hilera.getHead();
                 while(temp!=null)
                 {
                     temp.chnDir();
                     temp.chnX();
                     temp.chnY();
-                    temp=temp.getNext();
+                    temp=(Enemy) temp.getNext();
                 }
                 
             }
             else if(hilera.getHead().getX()>=hilera.getHead().getSup())
             {
-                temp=hilera.getHead();
+                temp=(Enemy) hilera.getHead();
                 while(temp!=null)
                 {
                     temp.chnDir();
                     temp.chnX();
                     temp.chnY();
-                    temp=temp.getNext();
+                    temp=(Enemy) temp.getNext();
                     
                 }
             }
             else
             {
-                temp=hilera.getHead();
+                temp=(Enemy) hilera.getHead();
                 while(temp!=null)
                 {
                     temp.chnX();
-                    temp=temp.getNext();
+                    temp=(Enemy) temp.getNext();
                 }
                 
                     
             }
         try {
-            Thread.sleep(300);
+            Thread.sleep(gestor.getGame().getBasic().getHead().getSpeed());
             } 
         catch (InterruptedException ex) 
             {

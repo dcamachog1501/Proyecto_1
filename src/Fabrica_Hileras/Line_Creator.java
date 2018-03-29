@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Enemigos;
+package Fabrica_Hileras;
+
+import Hileras.Line;
+import Ventanas.Gestor2;
 
 /**
  *
- * @author Daniel Camacho 
+ * @author dcama
  */
-public class Enemy_Factory {
-    
+public interface Line_Creator 
+{
+    public Line createLine(Gestor2 gest);
 }

@@ -7,7 +7,7 @@ package Manager;
 
 import Componentes_Jugador.Nave;
 import Componentes_Jugador.Bullet;
-import Enemigos.Basic_Line_Creator;
+import Hileras.Basic_Line;
 import Ventanas.Gestor2;
 import java.awt.*;
 

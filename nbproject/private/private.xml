@@ -5,12 +5,18 @@
         <group>
             <file>file:/C:/Users/dcama/Desktop/Proyecto_1/src/Ventanas/Ventana_Datos.java</file>
             <file>file:/C:/Users/dcama/Desktop/Proyecto_1/src/Ventanas/Ventana_Juego.java</file>
+            <file>file:/C:/Users/dcama/Desktop/Proyecto_1/src/Threads/Setup.java</file>
+            <file>file:/C:/Users/dcama/Desktop/Proyecto_1/src/Componentes_Jugador/Nave.java</file>
+            <file>file:/C:/Users/dcama/Desktop/Proyecto_1/src/Manager/GameManager.java</file>
+            <file>file:/C:/Users/dcama/Desktop/Proyecto_1/src/Threads/Left.java</file>
+            <file>file:/C:/Users/dcama/Desktop/Proyecto_1/src/Ventanas/Ventana_Inicial.java</file>
+            <file>file:/C:/Users/dcama/Desktop/Proyecto_1/src/Threads/BasicMove.java</file>
+            <file>file:/C:/Users/dcama/Desktop/Proyecto_1/src/Enemigos/Basic.java</file>
             <file>file:/C:/Users/dcama/Desktop/Proyecto_1/src/Enemigos/Basic_Line_Creator.java</file>
             <file>file:/C:/Users/dcama/Desktop/Proyecto_1/src/Enemigos/Enemy_Factory.java</file>
             <file>file:/C:/Users/dcama/Desktop/Proyecto_1/src/Threads/Shoot.java</file>
-            <file>file:/C:/Users/dcama/Desktop/Proyecto_1/src/Manager/GameManager.java</file>
-            <file>file:/C:/Users/dcama/Desktop/Proyecto_1/src/Threads/BasicMove.java</file>
-            <file>file:/C:/Users/dcama/Desktop/Proyecto_1/src/Enemigos/Basic.java</file>
+            <file>file:/C:/Users/dcama/Desktop/Proyecto_1/src/Main/Main.java</file>
+            <file>file:/C:/Users/dcama/Desktop/Proyecto_1/src/Ventanas/Gestor2.java</file>
         </group>
     </open-files>
 </project-private>

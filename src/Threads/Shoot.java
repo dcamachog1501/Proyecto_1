@@ -6,11 +6,9 @@
 package Threads;
 
 import Componentes_Jugador.Bullet;
-import Enemigos.Basic;
+import Enemigos.Enemy;
 import Ventanas.Gestor2;
 import java.awt.event.KeyListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -35,12 +33,13 @@ public class Shoot implements Runnable
     public void run() 
     {
         gestor.getGame().chanCond();
+        set.getBull().stnCond();
         gestor.getGame().rem();
         set.getBull().setBullx(0);
         set.getBull().setBullx(Navx+17);
         while(set.getBull().getBully()>0)
         {
-            Basic temp=gestor.getGame().getBasic().getHead();
+            Enemy temp=gestor.getGame().getBasic().getHead();
             int ind=0;
             while(temp!=null)
             {
@@ -50,14 +49,17 @@ public class Shoot implements Runnable
                 {
                     System.out.println("Killing");
                     gestor.getGame().getBasic().eliminate(ind);
-                    gestor.getGame().addMarc(temp.getPunt());
-                    gestor.getGame().updateMarcs();
+                    set.getBull().chnCond();
+                    set.getBull().setBully(Navy);
+                    gestor.getGame().chanCond();
+                    gestor.getGame().adder();
                     break;
                 }
-                temp=temp.getNext();
+                temp=(Enemy) temp.getNext();
                 ++ind;
             }
-            
+            if(set.getBull().getCond()==0)
+            {
             try {
                 set.getBull().chnBully(-25);
                 Thread.sleep(10);
@@ -66,10 +68,18 @@ public class Shoot implements Runnable
                 {
                 e.printStackTrace();
                 }
+            }
+            else
+            {
+                break;
+            }
         }
+        if(set.getBull().getCond()==0)
+        {
         set.getBull().setBully(Navy);
         gestor.getGame().chanCond();
         gestor.getGame().adder();
+        }
     }
     
 }

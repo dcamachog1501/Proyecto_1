@@ -6,7 +6,11 @@
 package Ventanas;
 
 import Componentes_Jugador.Bullet;
-import Enemigos.Basic_Line_Creator;
+import Fabrica_Hileras.A_Line_Creator;
+import Fabrica_Hileras.A_Line_Creator;
+import Hileras.A_Line;
+import Hileras.A_Line;
+import Hileras.Hileras_GUI;
 import Threads.BasicMove;
 import Threads.Left;
 import Threads.Right;
@@ -60,17 +64,19 @@ public class Ventana_Juego extends JFrame
     private final Font fuentem;
     private final Gestor2 gest;
     private final Setup set;
+    private final Hileras_GUI gui;
     
     //Thread que permite el movimiento continuo de los enemigos.
     private Thread mover;
     private BasicMove move;
     
-    private Basic_Line_Creator basic;
+    private A_Line basic;
     
     private boolean cond;
     
     Ventana_Juego(String title,Font FuenteT,Image back,Image Icono, Color Btn,Font FuenteM,Gestor2 gest,Setup set)
     {
+       this.gui=new Hileras_GUI();
        this.tec0=new Teclado0();
        this.tec2= new Teclado2();
        this.title=title;
@@ -84,13 +90,14 @@ public class Ventana_Juego extends JFrame
        this.marc=0;
        this.marcs=String.format("%013d",marc);
        this.Punt= new JLabel(marcs);
-       this.basic=new Basic_Line_Creator();
+       this.basic=(A_Line) gui.buildHilera(new A_Line_Creator(),gest);
        basic.createLine();
        this.move= new BasicMove(basic,gest);
        this.cond=false;
+       
        Init();
     }
-  public Basic_Line_Creator getBasic()
+  public A_Line getBasic()
    {
        return basic;
    }

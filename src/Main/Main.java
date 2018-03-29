@@ -5,7 +5,9 @@
  */
 package Main;
 
-import Enemigos.Basic_Line_Creator;
+import Enemigos.Enemy;
+import Hileras.Basic_Line;
+import Hileras.Line;
 import Threads.Setup;
 import Ventanas.Gestor2;
 
@@ -13,7 +15,8 @@ import Ventanas.Gestor2;
  *
  * @author dcama
  */
-public class Main {
+public class Main 
+{
     
     
     public static void main(String[] args) 
@@ -22,5 +25,4 @@ public class Main {
        g.Init();
        g.gestInicial();
     }
-
 }

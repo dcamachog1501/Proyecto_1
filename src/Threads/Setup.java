@@ -8,7 +8,7 @@ package Threads;
 import Componentes_Jugador.Bullet;
 import Componentes_Jugador.Nave;
 import Enemigos.Basic;
-import Enemigos.Basic_Line_Creator;
+import Hileras.Basic_Line;
 import Manager.GameManager;
 import Ventanas.Gestor2;
 import java.awt.*;
@@ -46,6 +46,10 @@ public class Setup implements Runnable
         System.out.println("Initialized");
         gestor.gestJuego();
         manager=new GameManager(gestor,getBull(),getNave());
+        
+    }
+     public void killBull()
+    {
         
     }
     public synchronized void start()

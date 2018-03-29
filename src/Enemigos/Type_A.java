@@ -5,15 +5,16 @@
  */
 package Enemigos;
 
-import java.awt.*;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 /**
  *
  * @author Daniel Camacho
  */
-public class Basic implements Enemy
+public class Type_A implements Enemy
 {
-   private Basic next;
+   private Enemy next;
    private Image face;
    private int enx;
    private int eny;
@@ -42,19 +43,19 @@ public class Basic implements Enemy
     @Override
     public void setType() 
     {
-        this.type="Basic";
+        this.type="Type A";
     }
 
     @Override
     public void setFace() 
     {
-        this.face=Toolkit.getDefaultToolkit().getImage("Resources/Enemigos/Basic.png");
+        this.face=Toolkit.getDefaultToolkit().getImage("Resources/Enemigos/ClaseA.png");
     }
 
     @Override
     public void setHealth() 
     {
-        this.health=1;
+        this.health=2;
     }
 
     @Override
@@ -66,7 +67,7 @@ public class Basic implements Enemy
     @Override
     public void setNext(Object enm) 
     {
-        this.next=(Basic) enm;
+        this.next=(Enemy) enm;
     }
 
     @Override
@@ -90,7 +91,7 @@ public class Basic implements Enemy
     @Override
     public void setPunt() 
     {
-        this.punt=100;
+        this.punt=200;
     }
 
     @Override
@@ -115,7 +116,7 @@ public class Basic implements Enemy
         return inf;
     }
    @Override
-    public Basic getNext()
+    public Enemy getNext()
     {
         return this.next;
     }
@@ -178,7 +179,7 @@ public class Basic implements Enemy
     @Override
     public void chnHealth(int x) 
     {
-        this.health-=x;
+        this.health=this.health-x;
     }
     @Override
     public int getSpeed()

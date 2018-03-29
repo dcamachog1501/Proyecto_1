@@ -18,6 +18,7 @@ public class Bullet
     private final Gestor2 gestor;
     private int Bullx;
     private int Bully;
+    private int cond;
     private Rectangle recb;
     public Bullet(Gestor2 gest,int x, int y)
     {
@@ -25,6 +26,7 @@ public class Bullet
         this.Bullx=x;
         this.Bully=y;
         this.recb= new Rectangle(Bullx,Bully,24,24);
+        this.cond=0;
     }
     public void Render(Graphics g)
     {
@@ -55,12 +57,23 @@ public class Bullet
     {
         return Bully;
     }
-    public Rectangle getRecb()
+    public void chnCond()
     {
-        return recb;
+        if(cond==0)
+        {
+            cond=1;
+        }
+        else
+        {
+            cond=0;
+        }
     }
-    public void chnRecb()
+    public int getCond()
     {
-        this.recb=new Rectangle(this.getBullx(),this.getBully(),24,24);
+        return cond;
+    }
+    public void stnCond()
+    {
+        this.cond=0;
     }
 }   
