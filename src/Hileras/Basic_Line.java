@@ -27,6 +27,7 @@ public class Basic_Line implements Line
     private Basic_Creator fabrica;
     private Image current;
     private Gestor2 gestor;
+    private Line next;
     @Override
     public void setFactory()
     {
@@ -57,6 +58,7 @@ public class Basic_Line implements Line
         this.setSup();
         this.setGestor(gest);
         this.setFactory();
+        this.next=null;
     }
     @Override
     public void adder(Object enm)
@@ -217,6 +219,18 @@ public class Basic_Line implements Line
     public void setGestor(Gestor2 gest) 
     {
         this.gestor=gest;
+    }
+
+    @Override
+    public void setNext(Line l) 
+    {
+        this.next=l;
+    }
+
+    @Override
+    public Line getNext() 
+    {
+        return this.next;
     }
 
 }

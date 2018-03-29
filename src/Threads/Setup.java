@@ -13,6 +13,8 @@ import Manager.GameManager;
 import Ventanas.Gestor2;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -46,10 +48,6 @@ public class Setup implements Runnable
         System.out.println("Initialized");
         gestor.gestJuego();
         manager=new GameManager(gestor,getBull(),getNave());
-        
-    }
-     public void killBull()
-    {
         
     }
     public synchronized void start()

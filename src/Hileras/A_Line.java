@@ -33,6 +33,7 @@ public class A_Line implements Line
     private Boss_Creator fabricab;
     private Image current;
     private Gestor2 gestor;
+    private Line next;
     @Override
     public void setFactory()
     {
@@ -64,6 +65,7 @@ public class A_Line implements Line
         this.setSup();
         this.setFactory();
         this.setGestor(gest);
+        this.next=null;
     }
     @Override
     public void setGestor(Gestor2 gest)
@@ -257,6 +259,18 @@ public class A_Line implements Line
     public void setCurrent() 
     {
         this.current=Toolkit.getDefaultToolkit().getImage("Resources/Current Icons/ClaseA.png");
+    }
+
+    @Override
+    public void setNext(Line l) 
+    {
+        this.next=l;
+    }
+
+    @Override
+    public Line getNext() 
+    {
+        return this.next;
     }
 
 }

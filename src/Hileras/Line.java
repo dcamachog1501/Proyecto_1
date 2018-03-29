@@ -37,4 +37,6 @@ public interface Line
     public void setFactory();
     public void eliminate(int x);
     public void setGestor(Gestor2 gest);
+    public void setNext(Line l);
+    public Line getNext();
 }

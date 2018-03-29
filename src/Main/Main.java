@@ -8,6 +8,8 @@ package Main;
 import Enemigos.Enemy;
 import Hileras.Basic_Line;
 import Hileras.Line;
+import Level_Creator.Level;
+import Level_Creator.Level_Creator;
 import Threads.Setup;
 import Ventanas.Gestor2;
 
@@ -24,5 +26,13 @@ public class Main
        Gestor2 g = new Gestor2();
        g.Init();
        g.gestInicial();
+//        Level_Creator l = new Level_Creator(g);
+//        Level v=l.createLevel(0);
+//        Line temp=v.getHead();
+//        while(temp.getNext()!=null)
+//        {
+//            System.out.println(temp);
+//            temp=temp.getNext();
+//        }
     }
 }

@@ -5,10 +5,7 @@
  */
 package Ventanas;
 
-import Componentes_Jugador.Bullet;
 import Fabrica_Hileras.A_Line_Creator;
-import Fabrica_Hileras.A_Line_Creator;
-import Hileras.A_Line;
 import Hileras.A_Line;
 import Hileras.Hileras_GUI;
 import Threads.BasicMove;
@@ -90,10 +87,9 @@ public class Ventana_Juego extends JFrame
        this.marc=0;
        this.marcs=String.format("%013d",marc);
        this.Punt= new JLabel(marcs);
-       this.basic=(A_Line) gui.buildHilera(new A_Line_Creator(),gest);
-       basic.createLine();
-       this.move= new BasicMove(basic,gest);
        this.cond=false;
+       this.basic=new A_Line_Creator().createLine(gest);
+       this.move= new BasicMove(basic,gest);
        
        Init();
     }
@@ -205,7 +201,7 @@ public class Ventana_Juego extends JFrame
 
         JLabel Punt2= new JLabel();
         Punt2.setBackground(Color.BLACK);
-        Punt2.setIcon(new ImageIcon(basic.getCurrent()));
+        //Punt2.setIcon(new ImageIcon(basic.getCurrent()));
         Punt2.setOpaque(true);
         Punt2.setBounds(12,75,266,250);
         Punt2.setForeground(Color.GREEN);
