@@ -7,7 +7,9 @@ package Hileras;
 
 import Enemigos.Basic;
 import Enemigos.Enemy;
+import Enemigos.Enemy_GUI;
 import Fabrica_Enemigos.Basic_Creator;
+import Threads.BasicMove;
 import Ventanas.Gestor2;
 import java.awt.*;
 
@@ -28,6 +30,9 @@ public class Basic_Line implements Line
     private Image current;
     private Gestor2 gestor;
     private Line next;
+    private BasicMove move;
+    private Enemy_GUI GUI;
+    private String type;
     @Override
     public void setFactory()
     {
@@ -58,7 +63,10 @@ public class Basic_Line implements Line
         this.setSup();
         this.setGestor(gest);
         this.setFactory();
+        this.setType();
         this.next=null;
+        this.move= new BasicMove(this,gestor);
+        this.GUI= new Enemy_GUI();
     }
     @Override
     public void adder(Object enm)
@@ -97,7 +105,7 @@ public class Basic_Line implements Line
     {
       while(len<lenmax)
       {
-          Enemy enm=fabrica.createEnemy(this.getEnmx(),this.getEnmy(),this.getSup(),this.getInf());
+          Enemy enm=GUI.buildEnemy(fabrica,this.enmx,this.enmy, this.sup, this.inf);
           this.adder(enm);
           enmx-=100;
           inf-=100;
@@ -142,22 +150,44 @@ public class Basic_Line implements Line
     @Override
     public void eliminate(int x)
     {
-       Basic temp= this.getHead();
+       Enemy temp= this.getHead();
        int ind=0;
        while(temp!=null)
        {
            if(x==0)
            {
-               this.Head=(Basic) temp.getNext();
-               //this.elim+=1;
+               if(temp.getHealth()==1)
+               {
                
+               this.Head=(Basic)temp.getNext();
+               gestor.getGame().addMarc(temp.getPunt());
+               gestor.getGame().updateMarcs();
+               this.len--;
                break;
+               }
+           
+               else
+               {
+                    temp.chnHealth(1);
+                    break;
+               }
            }
            else if(ind+1==x)
            {
+               if(temp.getHealth()==1)
+               {
                temp.setNext(temp.getNext().getNext());
-               //this.elim+=1;
+               gestor.getGame().addMarc(temp.getPunt());
+               gestor.getGame().updateMarcs();
+               this.len--;
                break;
+               }
+           
+               else
+               {
+                    temp.chnHealth(1);
+                    break;
+               }
            }
            else
            {
@@ -231,6 +261,28 @@ public class Basic_Line implements Line
     public Line getNext() 
     {
         return this.next;
+    }
+    public BasicMove getMove()
+    {
+        return this.move;
+    }
+
+    @Override
+    public void setType() 
+    {
+        this.type="Basic";
+    }
+
+    @Override
+    public String getType() 
+    {
+        return this.type;
+    }
+
+    @Override
+    public int getLen() 
+    {
+        return this.len;
     }
 
 }

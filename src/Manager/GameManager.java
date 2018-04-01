@@ -38,7 +38,7 @@ public class GameManager
     public void render(Graphics g)
     {
         System.out.println("Drawing");
-        gestor.getGame().getBasic().Render(g,gestor.getGame().getCanvas());
+        gestor.getGame().getLManager().getCurrent().Render(g,gestor.getGame().getCanvas());
         if (gestor.getGame().getCond()==false)
         {
         nave.render(g);

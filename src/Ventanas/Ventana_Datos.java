@@ -5,6 +5,7 @@
  */
 package Ventanas;
 
+import Threads.Level_Verifier;
 import Threads.Setup;
 import java.awt.*;
 import java.awt.event.*;
@@ -39,6 +40,8 @@ public class Ventana_Datos extends JFrame
   private final Image Right=Toolkit.getDefaultToolkit().getImage("Resources/Iconos/right.png");
   private final Image Left=Toolkit.getDefaultToolkit().getImage("Resources/Iconos/left.png");
   private Setup Inicio;
+  private Level_Verifier Level;
+  private Thread LevelT;
   private boolean cond;
   
   
@@ -75,6 +78,7 @@ public class Ventana_Datos extends JFrame
     this.color=Btn;
     this.fuentem=Fuente;
     this.gest=gest;
+    this.Level=new Level_Verifier(gest);
     Init();
   }
   /**
@@ -90,8 +94,10 @@ public class Ventana_Datos extends JFrame
   public void initJuego()
  {
      Inicio= new Setup(gest);
+     //LevelT= new Thread(Level);
      Inicio.start();
-     gest.getGame().moveStarter();
+    //LevelT.start();
+     gest.getGame().gameStarter();
  }
   
   /**

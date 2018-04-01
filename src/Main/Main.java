@@ -12,6 +12,7 @@ import Level_Creator.Level;
 import Level_Creator.Level_Creator;
 import Threads.Setup;
 import Ventanas.Gestor2;
+import java.util.Random;
 
 /**
  *
@@ -29,10 +30,13 @@ public class Main
 //        Level_Creator l = new Level_Creator(g);
 //        Level v=l.createLevel(0);
 //        Line temp=v.getHead();
-//        while(temp.getNext()!=null)
+//        while(temp!=null)
 //        {
 //            System.out.println(temp);
 //            temp=temp.getNext();
 //        }
+//        System.out.println(v.getLen());
+     
+        
     }
 }

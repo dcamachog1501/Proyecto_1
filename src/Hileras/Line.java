@@ -39,4 +39,8 @@ public interface Line
     public void setGestor(Gestor2 gest);
     public void setNext(Line l);
     public Line getNext();
+    public Object getMove();
+    public void setType();
+    public String getType();
+    public int getLen();
 }

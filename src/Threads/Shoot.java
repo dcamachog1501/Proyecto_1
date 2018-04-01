@@ -39,7 +39,7 @@ public class Shoot implements Runnable
         set.getBull().setBullx(Navx+17);
         while(set.getBull().getBully()>0)
         {
-            Enemy temp=gestor.getGame().getBasic().getHead();
+            Enemy temp=gestor.getGame().getLManager().getCurrent().getHead();
             int ind=0;
             while(temp!=null)
             {
@@ -48,7 +48,7 @@ public class Shoot implements Runnable
                    && b.getBully()<temp.getY()+64&&b.getBully()+24> temp.getY())
                 {
                     System.out.println("Killing");
-                    gestor.getGame().getBasic().eliminate(ind);
+                    gestor.getGame().getLManager().getCurrent().eliminate(ind);
                     set.getBull().chnCond();
                     set.getBull().setBully(Navy);
                     gestor.getGame().chanCond();

@@ -7,6 +7,7 @@ package Level_Creator;
 
 import Fabrica_Hileras.A_Line_Creator;
 import Fabrica_Hileras.Basic_Line_Creator;
+import Hileras.Hileras_GUI;
 import Hileras.Line;
 import Ventanas.Gestor2;
 import java.util.Random;
@@ -22,8 +23,9 @@ public class Level
     private int lenmax;
     private int current;
     private Gestor2 gestor;
+    private Hileras_GUI GUI;
     private Basic_Line_Creator basic;
-    private A_Line_Creator typeA;
+    private A_Line_Creator atype;
     public Level(int x,Gestor2 gest)
     {
       this.current=x;
@@ -31,8 +33,9 @@ public class Level
       this.len=0;
       this.lenmax=3;
       this.gestor=gest;
+      this.GUI= new Hileras_GUI();
       this.basic= new Basic_Line_Creator();
-      this.typeA= new A_Line_Creator();
+      this.atype= new A_Line_Creator();
     }
     public Line getLine()
     {
@@ -40,14 +43,14 @@ public class Level
         if(current>=0 && current<3)
         {
           Random r= new Random();
-          int rnd=r.nextInt(3);
-          if(rnd==1)
+          int rnd=r.nextInt(2);
+          if(rnd==0)
           {
-             l=basic.createLine(gestor);
+             l=GUI.buildHilera(basic, gestor);
           }
-          else
+          else if(rnd==1)
           {
-             l=typeA.createLine(gestor);
+             l=GUI.buildHilera(atype,gestor);
           }
           
         }
@@ -74,7 +77,7 @@ public class Level
     }
     public void generateLevel()
     {
-      while(len<=lenmax)
+      while(len<lenmax)
       {
           this.adder();
       }
@@ -82,5 +85,13 @@ public class Level
     public Line getHead()
     {
         return this.Head;
+    }
+    public int getLen()
+    {
+        return this.len;
+    }
+    public void chnLen(int x)
+    {
+        this.len-=x;
     }
 }

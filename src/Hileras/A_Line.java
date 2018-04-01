@@ -7,8 +7,10 @@ package Hileras;
 
 import Enemigos.Enemy;
 import Enemigos.Enemy;
+import Enemigos.Enemy_GUI;
 import Fabrica_Enemigos.A_Creator;
 import Fabrica_Enemigos.Boss_Creator;
+import Threads.BasicMove;
 import Ventanas.Gestor2;
 import java.awt.Canvas;
 import java.awt.Graphics;
@@ -34,11 +36,15 @@ public class A_Line implements Line
     private Image current;
     private Gestor2 gestor;
     private Line next;
+    private BasicMove move;
+    private Enemy_GUI GUI;
+    private String type;
     @Override
     public void setFactory()
     {
         this.fabrica=new A_Creator();
         this.fabricab= new Boss_Creator();
+        this.GUI= new Enemy_GUI();
     }
     @Override
     public boolean isEmpty()
@@ -65,7 +71,9 @@ public class A_Line implements Line
         this.setSup();
         this.setFactory();
         this.setGestor(gest);
+        this.setType();
         this.next=null;
+        this.move=new BasicMove(this,gestor);
     }
     @Override
     public void setGestor(Gestor2 gest)
@@ -108,12 +116,12 @@ public class A_Line implements Line
     public void createLine()
     {
       Random r= new Random();
-      int ind=r.nextInt(8);
+      int ind=r.nextInt(7);
       while(len<lenmax)
       {
           if(len==ind)
           {
-          Enemy enm=fabricab.createEnemy(this.getEnmx(),this.getEnmy(), this.getSup(),this.getInf());
+          Enemy enm=GUI.buildEnemy(fabricab,this.enmx,this.enmy,this.sup,this.inf);
           enm.setPunt();
           this.adder(enm);
           enmx-=100;
@@ -121,7 +129,7 @@ public class A_Line implements Line
           }
           else
           {
-          Enemy enm=fabrica.createEnemy(this.getEnmx(),this.getEnmy(),this.getSup(),this.getInf());
+          Enemy enm=GUI.buildEnemy(fabrica,this.enmx,this.enmy,this.sup,this.inf);
           this.adder(enm);
           enmx-=100;
           inf-=100;
@@ -179,7 +187,7 @@ public class A_Line implements Line
                this.Head=(Enemy) temp.getNext();
                gestor.getGame().addMarc(temp.getPunt());
                gestor.getGame().updateMarcs();
-               
+               this.len--;
                break;
                }
            
@@ -196,6 +204,7 @@ public class A_Line implements Line
                temp.setNext(temp.getNext().getNext());
                gestor.getGame().addMarc(temp.getPunt());
                gestor.getGame().updateMarcs();
+               this.len--;
                break;
                }
            
@@ -272,5 +281,24 @@ public class A_Line implements Line
     {
         return this.next;
     }
+    @Override 
+    public void setType()
+    {
+        this.type= "Type A";
+    }
+    public BasicMove getMove()
+    {
+        return this.move;
+    }
+    @Override
+    public String getType()
+    {
+        return this.type;
+    }
 
+    @Override
+    public int getLen() 
+    {
+        return this.len;
+    }
 }

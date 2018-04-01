@@ -8,8 +8,10 @@ package Ventanas;
 import Fabrica_Hileras.A_Line_Creator;
 import Hileras.A_Line;
 import Hileras.Hileras_GUI;
+import Manager.LevelManager;
 import Threads.BasicMove;
 import Threads.Left;
+import Threads.Level_Verifier;
 import Threads.Right;
 import Threads.Setup;
 import Threads.Shoot;
@@ -47,6 +49,9 @@ public class Ventana_Juego extends JFrame
     
     //Label que proyecta el marcador 
     private JLabel Punt;
+    private JLabel Punt4;
+    private JLabel Punt5;
+    private JLabel Punt7;
    
     //KeyListeners encargados de recibir los inputs del usuario
     private final Teclado0 tec0;
@@ -55,48 +60,49 @@ public class Ventana_Juego extends JFrame
     //Atributos de la ventana
     private final String title;
     private final Font fuentet;
-    private final Image back;
     private final Image icono;
     private final Color color;
     private final Font fuentem;
     private final Gestor2 gest;
-    private final Setup set;
-    private final Hileras_GUI gui;
-    
     //Thread que permite el movimiento continuo de los enemigos.
     private Thread mover;
-    private BasicMove move;
-    
-    private A_Line basic;
+    private Object move;
     
     private boolean cond;
     
-    Ventana_Juego(String title,Font FuenteT,Image back,Image Icono, Color Btn,Font FuenteM,Gestor2 gest,Setup set)
+    private LevelManager LManager;
+    private Level_Verifier level;
+    private Thread lever;
+    
+    Ventana_Juego(String title,Font FuenteT,Image Icono, Color Btn,Font FuenteM,Gestor2 gest)
     {
-       this.gui=new Hileras_GUI();
        this.tec0=new Teclado0();
        this.tec2= new Teclado2();
        this.title=title;
        this.fuentem=FuenteM;
        this.fuentet=FuenteT;
-       this.back=back;
        this.icono=Icono;
        this.color=Btn;
        this.gest=gest;
-       this.set=set;
        this.marc=0;
        this.marcs=String.format("%013d",marc);
        this.Punt= new JLabel(marcs);
+       this.Punt4= new JLabel();
+       this.Punt5= new JLabel();
+       this.Punt7= new JLabel();
+
+       
        this.cond=false;
-       this.basic=new A_Line_Creator().createLine(gest);
-       this.move= new BasicMove(basic,gest);
+       this.level= new Level_Verifier(gest);
+       this.LManager=new LevelManager(gest);
+       this.move=LManager.getCurrent().getMove();
        
        Init();
     }
-  public A_Line getBasic()
-   {
-       return basic;
-   }
+  public LevelManager getLManager()
+  {
+      return LManager;
+  }
   public Teclado2 getTec()
   {
       return tec2;
@@ -134,14 +140,33 @@ public class Ventana_Juego extends JFrame
   {
       this.addKeyListener(tec2);
   }
-  public void moveStarter()
+  public void gameStarter()
   {
-      mover= new Thread(move);
+      mover= new Thread((Runnable) move);
       mover.start();
   }
   public Thread getMover()
   {
       return mover;
+  }
+  public void updateScreen()
+  {
+      if(LManager.getCurrent()==null)
+      {
+          System.out.println("CHANGING LEVEL");
+      }
+      else if(LManager.getCurrent().getNext()==null)
+      {
+      Punt4.setText("CURRENT "+ LManager.getCurrent().getType());
+      Punt5.setText("NEXT LEVEL");
+      Punt7.setText("LEVEL "+LManager.getLeveln());
+      }
+      else
+      {
+      Punt4.setText("CURRENT "+ LManager.getCurrent().getType());
+      Punt5.setText("NEXT "+ LManager.getCurrent().getNext().getType());
+      Punt7.setText("LEVEL "+LManager.getLeveln());
+      }
   }
    public void chanCond()
     {
@@ -201,7 +226,6 @@ public class Ventana_Juego extends JFrame
 
         JLabel Punt2= new JLabel();
         Punt2.setBackground(Color.BLACK);
-        //Punt2.setIcon(new ImageIcon(basic.getCurrent()));
         Punt2.setOpaque(true);
         Punt2.setBounds(12,75,266,250);
         Punt2.setForeground(Color.GREEN);
@@ -213,13 +237,13 @@ public class Ventana_Juego extends JFrame
         Punt3.setBounds(0,325,292,8);
         Panel1.add(Punt3);
 
-        JLabel Punt4= new JLabel("CURRENT ");
+        Punt4.setText("CURRENT "+ LManager.getCurrent().getType());
         Punt4.setBounds(5,210,292,292);
         Punt4.setForeground(Color.GREEN);
         Punt4.setFont(fuentem.deriveFont(Font.PLAIN,15));
         Panel1.add(Punt4);
 
-        JLabel Punt5= new JLabel("NEXT ");
+        Punt5.setText("NEXT "+ LManager.getCurrent().getNext().getType());
         Punt5.setBounds(5,280,292,292);
         Punt5.setForeground(Color.GREEN);
         Punt5.setFont(fuentem.deriveFont(Font.PLAIN,15));
@@ -244,7 +268,7 @@ public class Ventana_Juego extends JFrame
         });
         Panel1.add(Abort);
 
-        JLabel Punt7= new JLabel("LEVEL ");
+        Punt7.setText("LEVEL "+LManager.getLeveln());
         Punt7.setBounds(5,350,292,292);
         Punt7.setForeground(Color.GREEN);
         Punt7.setFont(fuentem.deriveFont(Font.PLAIN,15));

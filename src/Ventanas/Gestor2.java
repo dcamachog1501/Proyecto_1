@@ -84,7 +84,7 @@ public class Gestor2
         VentanaInicial=new Ventana_Inicial(Titulo,FuenteTitulo,Back,Icono,Btn, this);
         VentanaStatics=new Ventana_Estadisticas(Titulo,FuenteTitulo,Back,Icono,Btn,Back2,this);
         VentanaDatos=new Ventana_Datos(Titulo,FuenteTitulo,Back,Icono,Btn,this);
-        VentanaJuego=new Ventana_Juego(Titulo,FuenteTitulo,Back,Icono,Btn,FuenteMarc,this,VentanaDatos.getSet());
+        VentanaJuego=new Ventana_Juego(Titulo,FuenteTitulo,Icono,Btn,FuenteMarc,this);
     }
     /**
      * Metodo para obtener la instancia de VentanaJuego
