@@ -61,12 +61,10 @@ public class Basic implements Enemy
     {
         if(this.lvl<3)
         {
-            System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  "+ this.lvl);
             this.health=1;
         }
         else
         {
-            System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  "+this.lvl);
             this.health=2;
         }
     }

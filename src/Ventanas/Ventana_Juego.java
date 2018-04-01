@@ -49,6 +49,7 @@ public class Ventana_Juego extends JFrame
     
     //Label que proyecta el marcador 
     private JLabel Punt;
+    private JLabel Punt2;
     private JLabel Punt4;
     private JLabel Punt5;
     private JLabel Punt7;
@@ -88,6 +89,7 @@ public class Ventana_Juego extends JFrame
        this.marc=0;
        this.marcs=String.format("%013d",marc);
        this.Punt= new JLabel(marcs);
+       this.Punt2= new JLabel();
        this.Punt4= new JLabel();
        this.Punt5= new JLabel();
        this.Punt7= new JLabel();
@@ -158,18 +160,21 @@ public class Ventana_Juego extends JFrame
           Punt4.setText("CURRENT "+ LManager.getCurrent().getType());
           Punt5.setText("NEXT "+ LManager.getCurrent().getNext().getType());
           Punt7.setText("LEVEL "+LManager.getLeveln());
+          Punt2.setIcon(new ImageIcon(LManager.getCurrent().getCurrent()));
       }
       else if(LManager.getCurrent().getNext()==null)
       {
       Punt4.setText("CURRENT "+ LManager.getCurrent().getType());
       Punt5.setText("NEXT LEVEL");
       Punt7.setText("LEVEL "+LManager.getLeveln());
+      Punt2.setIcon(new ImageIcon(LManager.getCurrent().getCurrent()));
       }
       else
       {
       Punt4.setText("CURRENT "+ LManager.getCurrent().getType());
       Punt5.setText("NEXT "+ LManager.getCurrent().getNext().getType());
       Punt7.setText("LEVEL "+LManager.getLeveln());
+      Punt2.setIcon(new ImageIcon(LManager.getCurrent().getCurrent()));
       }
   }
    public void chanCond()
@@ -228,8 +233,8 @@ public class Ventana_Juego extends JFrame
         Panel1.setLayout(null);
         Panel1.add(Punt);
 
-        JLabel Punt2= new JLabel();
         Punt2.setBackground(Color.BLACK);
+        Punt2.setIcon(new ImageIcon(LManager.getCurrent().getCurrent()));
         Punt2.setOpaque(true);
         Punt2.setBounds(12,75,266,250);
         Punt2.setForeground(Color.GREEN);
