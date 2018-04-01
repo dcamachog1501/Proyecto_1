@@ -5,6 +5,7 @@
  */
 package Ventanas;
 
+import Manager.LevelManager;
 import Threads.Level_Verifier;
 import Threads.Setup;
 import java.awt.*;

@@ -14,9 +14,9 @@ import Ventanas.Gestor2;
  */
 public class Hileras_GUI 
 {
-    public Line buildHilera(Line_Creator linefactory,Gestor2 gest)
+    public Line buildHilera(Line_Creator linefactory,Gestor2 gest, int lvl)
     {
-        Line hilera=linefactory.createLine(gest);
+        Line hilera=linefactory.createLine(gest,lvl);
         return hilera;
     }
 }

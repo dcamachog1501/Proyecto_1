@@ -46,11 +46,11 @@ public class Level
           int rnd=r.nextInt(2);
           if(rnd==0)
           {
-             l=GUI.buildHilera(basic, gestor);
+             l=GUI.buildHilera(this.basic, this.gestor,this.current);
           }
           else if(rnd==1)
           {
-             l=GUI.buildHilera(atype,gestor);
+             l=GUI.buildHilera(this.atype,this.gestor,this.current);
           }
           
         }

@@ -74,8 +74,9 @@ public class Ventana_Juego extends JFrame
     private Level_Verifier level;
     private Thread lever;
     
-    Ventana_Juego(String title,Font FuenteT,Image Icono, Color Btn,Font FuenteM,Gestor2 gest)
+    Ventana_Juego(String title,Font FuenteT,Image Icono, Color Btn,Font FuenteM,Gestor2 gest,LevelManager lvl)
     {
+       this.LManager=lvl;
        this.tec0=new Teclado0();
        this.tec2= new Teclado2();
        this.title=title;
@@ -94,7 +95,6 @@ public class Ventana_Juego extends JFrame
        
        this.cond=false;
        this.level= new Level_Verifier(gest);
-       this.LManager=new LevelManager(gest);
        this.move=LManager.getCurrent().getMove();
        
        Init();
@@ -154,6 +154,10 @@ public class Ventana_Juego extends JFrame
       if(LManager.getCurrent()==null)
       {
           System.out.println("CHANGING LEVEL");
+          LManager.lvlUP();
+          Punt4.setText("CURRENT "+ LManager.getCurrent().getType());
+          Punt5.setText("NEXT "+ LManager.getCurrent().getNext().getType());
+          Punt7.setText("LEVEL "+LManager.getLeveln());
       }
       else if(LManager.getCurrent().getNext()==null)
       {

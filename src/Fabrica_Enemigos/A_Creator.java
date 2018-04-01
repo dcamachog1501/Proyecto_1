@@ -7,6 +7,7 @@ package Fabrica_Enemigos;
 
 import Enemigos.Type_A;
 import Enemigos.Enemy;
+import Ventanas.Gestor2;
 
 /**
  *
@@ -15,10 +16,10 @@ import Enemigos.Enemy;
 public class A_Creator implements Enemy_Creator
 {
     @Override
-    public Enemy createEnemy(int x, int y, int sup, int inf) 
+    public Enemy createEnemy(int x, int y, int sup, int inf, Gestor2 gest, int lvl ) 
     {
         Type_A enm= new Type_A();
-        enm.Init(x,y,sup,inf);
+        enm.Init(x,y,sup,inf, gest,lvl);
         return enm;
     } 
 }

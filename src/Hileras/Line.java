@@ -33,7 +33,7 @@ public interface Line
     public Enemy getHead();
     public int getSup();
     public int getInf();
-    public void Init(Gestor2 gest);
+    public void Init(Gestor2 gest,int lvl);
     public void setFactory();
     public void eliminate(int x);
     public void setGestor(Gestor2 gest);

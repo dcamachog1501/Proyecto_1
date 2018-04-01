@@ -5,6 +5,7 @@
  */
 package Enemigos;
 
+import Ventanas.Gestor2;
 import java.awt.Image;
 import java.awt.Toolkit;
 
@@ -25,10 +26,12 @@ public class Type_A implements Enemy
    private int punt;
    private String type;
    private int speed;
-   
+   private Gestor2 gestor;
+   private int lvl;
    @Override
-   public void Init(int x, int y,int sup,int inf)
+   public void Init(int x, int y,int sup,int inf, Gestor2 gest, int lvl)
    {
+      setGest(gest);
       setType();
       setFace();
       setHealth();
@@ -39,6 +42,7 @@ public class Type_A implements Enemy
       setPunt();
       setX(x);
       setY(y);
+      this.lvl=lvl;
    }
     @Override
     public void setType() 
@@ -55,7 +59,18 @@ public class Type_A implements Enemy
     @Override
     public void setHealth() 
     {
-        this.health=2;
+        if(lvl<5)
+        {
+            this.health=2;
+        }
+        else if(lvl<7)
+        {
+            this.health=3;
+        }
+        else
+        {
+            this.health=4;
+        }
     }
 
     @Override
@@ -185,5 +200,11 @@ public class Type_A implements Enemy
     public int getSpeed()
     {
         return this.speed;
+    }
+
+    @Override
+    public void setGest(Gestor2 gest) 
+    {
+        this.gestor= gest;
     }
 }

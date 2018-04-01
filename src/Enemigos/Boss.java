@@ -5,6 +5,7 @@
  */
 package Enemigos;
 
+import Ventanas.Gestor2;
 import java.awt.Image;
 import java.awt.Toolkit;
 
@@ -25,9 +26,11 @@ public class Boss implements Enemy
    private int punt;
    private String type;
    private int speed;
+   private Gestor2 gestor;
+   private int lvl;
    
    @Override
-   public void Init(int x, int y,int sup,int inf)
+   public void Init(int x, int y,int sup,int inf, Gestor2 gest,int lvl)
    {
       setType();
       setFace();
@@ -39,6 +42,8 @@ public class Boss implements Enemy
       setPunt();
       setX(x);
       setY(y);
+      setGest(gest);
+      this.lvl=lvl;
    }
     @Override
     public void setType() 
@@ -185,5 +190,10 @@ public class Boss implements Enemy
     public int getSpeed()
     {
         return this.speed;
+    }
+    @Override
+    public void setGest(Gestor2 gest) 
+    {
+        this.gestor=gest;
     }
 }

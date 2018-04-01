@@ -39,6 +39,8 @@ public class A_Line implements Line
     private BasicMove move;
     private Enemy_GUI GUI;
     private String type;
+    private int lvl;
+            
     @Override
     public void setFactory()
     {
@@ -59,7 +61,7 @@ public class A_Line implements Line
         }
     }
     @Override 
-    public void Init(Gestor2 gest)
+    public void Init(Gestor2 gest, int lvl)
     {
         this.setCurrent();
         this.setEnmx();
@@ -74,6 +76,7 @@ public class A_Line implements Line
         this.setType();
         this.next=null;
         this.move=new BasicMove(this,gestor);
+        this.lvl=lvl;
     }
     @Override
     public void setGestor(Gestor2 gest)
@@ -121,7 +124,7 @@ public class A_Line implements Line
       {
           if(len==ind)
           {
-          Enemy enm=GUI.buildEnemy(fabricab,this.enmx,this.enmy,this.sup,this.inf);
+          Enemy enm=GUI.buildEnemy(fabricab,this.enmx,this.enmy,this.sup,this.inf,this.gestor,this.lvl);
           enm.setPunt();
           this.adder(enm);
           enmx-=100;
@@ -129,7 +132,7 @@ public class A_Line implements Line
           }
           else
           {
-          Enemy enm=GUI.buildEnemy(fabrica,this.enmx,this.enmy,this.sup,this.inf);
+          Enemy enm=GUI.buildEnemy(fabrica,this.enmx,this.enmy,this.sup,this.inf,this.gestor,this.lvl);
           this.adder(enm);
           enmx-=100;
           inf-=100;

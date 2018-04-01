@@ -47,20 +47,13 @@ public class BasicMove implements Runnable
                 temp=(Enemy) temp.getNext();
                 ++ind;
             }
-            if(gestor.getGame().getLManager().getLevel().getLen()==0)
-            {
-                System.out.println("-----------------LEVEL UP!----------------");
-                gestor.getGame().getLManager().lvlUP();
-                gestor.getGame().updateScreen();
-                updateHil();
-            }
-            else if(gestor.getGame().getLManager().getCurrent().getHead()==null)
+            
+            if(gestor.getGame().getLManager().getCurrent().getHead()==null)
             {
                 System.out.println("-----------------NEXT ROUND----------------");
                 gestor.getGame().getLManager().nextLine();
                 gestor.getGame().updateScreen();
                 updateHil();
-                System.out.println(gestor.getGame().getLManager().getLevel().getLen()+"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
             }
             else if(hilera.getHead().getX()<=hilera.getHead().getInf())
             {

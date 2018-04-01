@@ -5,6 +5,7 @@
  */
 package Enemigos;
 
+import Ventanas.Gestor2;
 import java.awt.*;
 
 /**
@@ -34,8 +35,9 @@ public interface Enemy
     public void chnY();
     public void chnDir();
     public int getPunt();  
-    public void Init(int x,int y,int sup,int inf);
+    public void Init(int x,int y,int sup,int inf, Gestor2 gest,int lvl);
     public int getHealth();
     public void chnHealth(int x);
     public int getSpeed();
+    public void setGest(Gestor2 gest);
 }

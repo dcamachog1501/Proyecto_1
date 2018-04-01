@@ -15,10 +15,10 @@ import Ventanas.Gestor2;
 public class Basic_Line_Creator implements Line_Creator 
 {
     @Override
-    public Basic_Line createLine(Gestor2 gest) 
+    public Basic_Line createLine(Gestor2 gest,int lvl) 
     {
        Basic_Line hilera=new Basic_Line();
-       hilera.Init(gest);
+       hilera.Init(gest,lvl);
        hilera.createLine();
        return hilera;
     }

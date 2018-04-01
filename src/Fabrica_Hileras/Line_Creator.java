@@ -14,5 +14,5 @@ import Ventanas.Gestor2;
  */
 public interface Line_Creator 
 {
-    public Line createLine(Gestor2 gest);
+    public Line createLine(Gestor2 gest,int lvl);
 }

@@ -6,6 +6,7 @@
 package Fabrica_Enemigos;
 
 import Enemigos.Enemy;
+import Ventanas.Gestor2;
 
 /**
  *
@@ -13,5 +14,5 @@ import Enemigos.Enemy;
  */
 public interface Enemy_Creator
 {
-    public Enemy createEnemy(int x, int y, int sup, int inf);
+    public Enemy createEnemy(int x, int y, int sup, int inf, Gestor2 gest, int lvl);
 }

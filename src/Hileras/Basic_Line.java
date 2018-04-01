@@ -33,6 +33,7 @@ public class Basic_Line implements Line
     private BasicMove move;
     private Enemy_GUI GUI;
     private String type;
+    private int lvl;
     @Override
     public void setFactory()
     {
@@ -51,7 +52,7 @@ public class Basic_Line implements Line
         }
     }
     @Override 
-    public void Init(Gestor2 gest)
+    public void Init(Gestor2 gest, int lvl)
     {
         this.setCurrent();
         this.setEnmx();
@@ -67,6 +68,7 @@ public class Basic_Line implements Line
         this.next=null;
         this.move= new BasicMove(this,gestor);
         this.GUI= new Enemy_GUI();
+        this.lvl=lvl;
     }
     @Override
     public void adder(Object enm)
@@ -105,7 +107,7 @@ public class Basic_Line implements Line
     {
       while(len<lenmax)
       {
-          Enemy enm=GUI.buildEnemy(fabrica,this.enmx,this.enmy, this.sup, this.inf);
+          Enemy enm=GUI.buildEnemy(fabrica,this.enmx,this.enmy, this.sup, this.inf,this.gestor,this.lvl);
           this.adder(enm);
           enmx-=100;
           inf-=100;
